@@ -9,6 +9,7 @@ public class dispatcher {
     }
 
     public void register(interceptor i, contextObject co){
+        i.setContextObject(co);
         this.interceptors.add(i);
     }
 
@@ -16,9 +17,13 @@ public class dispatcher {
         this.interceptors.remove(i);
     }
 
-    public void callback(){
-        // implement iteration here
-        this.interceptors.get(0).execute();
+    public void callback(String event){
+        for(int i = 0; i < interceptors.size(); i++){
+            if(this.interceptors.get(i).getTriggerEvent().equals(event)){
+                this.interceptors.get(i).execute();
+                break;
+            }
+        }
     }
 
 }
