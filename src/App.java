@@ -3,6 +3,8 @@ package src;
 import java.util.Scanner;
 
 import src.command.Command;
+import src.command.LogInCommand;
+import src.command.LogOutCommand;
 import src.command.Profile;
 import src.command.UIToolKit;
 
