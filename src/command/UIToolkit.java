@@ -11,6 +11,7 @@ public class UIToolKit {
 
     public void setCommand(String operation, Command command) {
         commands.put(operation, command);
+        System.out.println("command set");
     }
 
     public void setCommands(HashMap<String, Command> commands) {
