@@ -2,7 +2,7 @@ package src.command;
 
 public class AmendReservationCommand implements Command {
 
-    public AmendReservationCommand(String reservation) {
+    public AmendReservationCommand() {
         System.out.println("amending reservation command");
     }
 
