@@ -2,7 +2,7 @@ package src.command;
 
 public class CancelReservationCommand implements Command {
 
-    public CancelReservationCommand(String reservation) {
+    public CancelReservationCommand() {
         System.out.println("cancellation constructor");
     }
 
