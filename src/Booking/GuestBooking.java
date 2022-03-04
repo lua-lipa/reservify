@@ -7,10 +7,16 @@ public class GuestBooking implements Booking {
     private Date date;
     private String referenceNumber;
 
-    GuestBooking(double price, Date date, String referenceNumber) {
-        this.price = price;
-        this.date = date;
-        this.referenceNumber = referenceNumber;
+    // GuestBooking(double price, Date date, String referenceNumber) {
+    // this.price = price;
+    // this.date = date;
+    // this.referenceNumber = referenceNumber;
+    // }
+
+    public boolean createBooking() {
+        System.out.println("Guest Booking Done");
+
+        return true;
     }
 
     public void setPrice(double price) {

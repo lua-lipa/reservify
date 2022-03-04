@@ -2,14 +2,14 @@ package src.Reservation;
 
 public class ReservationFactory {
 
-    public Reservation getReservation(String reservationType) {
-        if (reservationType.equalsIgnoreCase("SINGLE")) {
-            return new SingleReservation();
-        } else if (reservationType.equalsIgnoreCase("RECURRING")) {
-            return new RecurringReservation(); 
+    public Reservation getReservation(Reservation reservation) {
+        if (reservation.getReservationType().equals("Single")) {
+            return new SingleReservation(null);
+        } else if (reservation.getReservationType().equals("Recurring")) {
+            return new RecurringReservation(null);
         } else {
             return null;
         }
     }
-    
+
 }

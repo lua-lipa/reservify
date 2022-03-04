@@ -1,11 +1,21 @@
 package src.Reservation;
 
-public class RecurringReservation implements Reservation {
+import src.Booking.Booking;
+
+public class RecurringReservation extends Reservation {
+
+    RecurringReservation(Booking booking) {
+        super(booking);
+    }
 
     @Override
-    public void book() {
-        // TODO Auto-generated method stub
-        
+    void reserve() {
+        this.booking.createBooking();
     }
-    
+
+    @Override
+    String getReservationType() {
+        return "Recurring";
+    }
+
 }
