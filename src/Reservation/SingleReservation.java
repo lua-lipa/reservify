@@ -1,10 +1,21 @@
 package src.Reservation;
 
-public class SingleReservation implements Reservation {
+import src.Booking.Booking;
+
+public class SingleReservation extends Reservation {
+
+    SingleReservation(Booking booking) {
+        super(booking);
+    }
 
     @Override
-    public void book() {
-        // TODO Auto-generated method stub
+    void reserve() {
+        this.booking.createBooking();
     }
-    
+
+    @Override
+    String getReservationType() {
+        return "Single";
+    }
+
 }
