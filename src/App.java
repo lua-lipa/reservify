@@ -6,13 +6,17 @@ import src.command.CancelReservationCommand;
 import src.command.Command;
 import src.command.MakeReservationCommand;
 import src.command.UIToolKit;
+import src.Interceptor.*;
 
 public class App {
     public static void main(String args[]) {
 
         UIToolKit ui = setUpUI();
-
         handleUserRequests(ui);
+        
+        // set up interceptor
+        Dispatcher dispatcher = new Dispatcher();
+        interceptor_setup("logging", dispatcher);
 
     }
 
@@ -70,5 +74,13 @@ public class App {
 
     private static String getUserReservations() {
         return "";
+    }
+
+    private static void interceptor_setup(String interceptor_type, Dispatcher dispatcher){
+        // Concrete and register interceptor with dispatcher
+        if(interceptor_type == "logging"){
+            Interceptor concreteInterceptor = new LoggingInterceptor("Method executed");
+            dispatcher.register(concreteInterceptor);
+        }
     }
 }
