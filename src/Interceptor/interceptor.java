@@ -1,4 +1,4 @@
-package src.Interceptor;
+package Interceptor;
 
 public interface Interceptor {
     public void execute();

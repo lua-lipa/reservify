@@ -1,4 +1,4 @@
-package src.Interceptor;
+package Interceptor;
 
 public class LoggingInterceptor implements Interceptor{
     ContextObject co;

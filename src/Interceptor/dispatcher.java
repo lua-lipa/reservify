@@ -1,4 +1,4 @@
-package src.Interceptor;
+package Interceptor;
 import java.util.*;
 
 public class Dispatcher {
