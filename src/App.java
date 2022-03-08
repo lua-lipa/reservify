@@ -3,11 +3,22 @@ import java.util.Scanner;
 
 import Command.*;
 
+import java.util.Scanner;
+
+import src.command.CancelReservationCommand;
+import src.command.Command;
+import src.command.MakeReservationCommand;
+import src.command.UIToolKit;
+import src.Interceptor.*;
+
 public class App {
     public static void main(String args[]) {
         UIToolKit ui = setUpUI();
         handleUserRequests(ui);
-
+        
+        // set up interceptor
+        Dispatcher dispatcher = new Dispatcher();
+        interceptor_setup("logging", dispatcher);
     }
 
     private static UIToolKit setUpUI() {
@@ -27,7 +38,6 @@ public class App {
     }
 
     private static void handleUserRequests(UIToolKit ui) {
-
         Scanner scanner = new Scanner(System.in); // Create a Scanner object
         boolean requestHandled = false;
         String welcomeMessage = "Hello, Please enter: 0. exit, 1. make a reservation, 2. cancel a reservation 3. change a reservation";
@@ -52,5 +62,13 @@ public class App {
 
     private static String getUserReservations() {
         return "";
+    }
+
+    private static void interceptor_setup(String interceptor_type, Dispatcher dispatcher){
+        // Concrete and register interceptor with dispatcher
+        if(interceptor_type == "logging"){
+            Interceptor concreteInterceptor = new LoggingInterceptor("Method executed");
+            dispatcher.register(concreteInterceptor);
+        }
     }
 }

@@ -1,7 +1,7 @@
 package src.Interceptor;
 
-public interface interceptor {
+public interface Interceptor {
     public void execute();
-    public void setContextObject(contextObject co);
+    public void setContextObject(ContextObject co);
     public String getTriggerEvent();
 }

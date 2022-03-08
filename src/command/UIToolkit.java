@@ -21,7 +21,7 @@ public class UIToolKit {
     public Command getCommand(int commandIndex) {
         return commands.get(commandIndex);
     }
-
+  
     public boolean executeCommand(int commandIndex) {
         Command command = commands.get(commandIndex);
         if (command == null) {
