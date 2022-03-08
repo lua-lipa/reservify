@@ -2,14 +2,7 @@
 import java.util.Scanner;
 
 import Command.*;
-
-import java.util.Scanner;
-
-import src.command.CancelReservationCommand;
-import src.command.Command;
-import src.command.MakeReservationCommand;
-import src.command.UIToolKit;
-import src.Interceptor.*;
+import Interceptor.*;
 
 public class App {
     public static void main(String args[]) {
