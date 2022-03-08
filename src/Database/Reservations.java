@@ -29,7 +29,7 @@ public class Reservations {
 
     public void printAllReservations() {
         for (Reservation reservation : this.allReservations) {
-            System.out.println("user reservation");
+            System.out.println("all reservations");
         }
     }
 
