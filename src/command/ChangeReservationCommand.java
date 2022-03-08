@@ -1,8 +1,8 @@
-package src.command;
+package Command;
 
-public class AmendReservationCommand implements Command {
+public class ChangeReservationCommand implements Command {
 
-    public AmendReservationCommand() {
+    public ChangeReservationCommand() {
         System.out.println("amending reservation command");
     }
 

@@ -1,4 +1,4 @@
-package src.command;
+package Command;
 
 public class CancelReservationCommand implements Command {
 

@@ -1,4 +1,4 @@
-package src.command;
+package Command;
 
 import java.util.HashMap;
 
@@ -22,9 +22,15 @@ public class UIToolKit {
         return commands.get(commandIndex);
     }
 
-    public void executeCommand(int commandIndex) {
+    public boolean executeCommand(int commandIndex) {
         Command command = commands.get(commandIndex);
+        if (command == null) {
+            System.out.println("There is no command under the entered index: " + commandIndex);
+            return false;
+        }
+        System.out.println("received command index: " + commandIndex + ": " + command);
         command.execute();
+        return true;
     }
 
 }
