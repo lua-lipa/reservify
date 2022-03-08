@@ -13,7 +13,7 @@ public class Dispatcher {
         i.setContextObject(co);
         this.interceptors.add(i);
     }
-
+  
     public void remove(Interceptor i){
         this.interceptors.remove(i);
     }

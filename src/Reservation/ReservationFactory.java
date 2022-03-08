@@ -12,4 +12,5 @@ public class ReservationFactory {
         }
     }
 
+    // Reservation reservation = new RecurringReservation(new EarlyBooking());
 }
