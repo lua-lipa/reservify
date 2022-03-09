@@ -10,4 +10,10 @@ public class MakeReservationCommand implements Command {
         System.out.println("creating a reservation");
     }
 
+    @Override
+    public void undo() {
+        // TODO Auto-generated method stub
+
+    }
+
 }
