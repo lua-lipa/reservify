@@ -15,7 +15,7 @@ public class App {
     public static void main(String args[]) {
         UIToolKit ui = setUpUI();
         handleUserRequests(ui);
-        
+
         // set up interceptor
         Dispatcher dispatcher = new Dispatcher();
         interceptor_setup("logging", dispatcher);
@@ -40,7 +40,7 @@ public class App {
     private static void handleUserRequests(UIToolKit ui) {
         Scanner scanner = new Scanner(System.in); // Create a Scanner object
         boolean requestHandled = false;
-        String welcomeMessage = "Hello, Please enter: 0. exit, 1. make a reservation, 2. cancel a reservation 3. change a reservation";
+        String welcomeMessage = "Hello, Please enter: 0. exit, 1. make a reservation, 2. cancel a reservation 3. change a reservation 4. undo operation";
 
         while (!requestHandled) {
             System.out.print(welcomeMessage);
@@ -51,22 +51,9 @@ public class App {
         scanner.close();
     }
 
-    private static String[] loadInstructions() {
-        String[] instructions = new String[6];
-        return instructions;
-    }
-
-    private static String getReservations() {
-        return "";
-    }
-
-    private static String getUserReservations() {
-        return "";
-    }
-
-    private static void interceptor_setup(String interceptor_type, Dispatcher dispatcher){
+    private static void interceptor_setup(String interceptor_type, Dispatcher dispatcher) {
         // Concrete and register interceptor with dispatcher
-        if(interceptor_type == "logging"){
+        if (interceptor_type == "logging") {
             Interceptor concreteInterceptor = new LoggingInterceptor("Method executed");
             dispatcher.register(concreteInterceptor);
         }

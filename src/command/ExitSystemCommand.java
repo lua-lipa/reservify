@@ -10,4 +10,10 @@ public class ExitSystemCommand implements Command {
         System.out.println("Exiting the system. Thank you for using reservify.");
     }
 
+    @Override
+    public void undo() {
+        // TODO Auto-generated method stub
+
+    }
+
 }
