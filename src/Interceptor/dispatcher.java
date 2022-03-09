@@ -1,19 +1,20 @@
 package src.Interceptor;
 import java.util.*;
 
-public class dispatcher {
-    List<interceptor> interceptors;
+public class Dispatcher {
+    List<Interceptor> interceptors;
     
-    public dispatcher(){
+    public Dispatcher(){
         this.interceptors = new ArrayList<>();
     }
 
-    public void register(interceptor i, contextObject co){
+    public void register(Interceptor i){
+        ContextObject co = new ContextObject();
         i.setContextObject(co);
         this.interceptors.add(i);
     }
-
-    public void remove(interceptor i){
+  
+    public void remove(Interceptor i){
         this.interceptors.remove(i);
     }
 

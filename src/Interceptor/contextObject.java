@@ -1,9 +1,9 @@
 package src.Interceptor;
 
-public class contextObject{
+public class ContextObject{
     String status;
     
-    public contextObject(){
+    public ContextObject(){
         this.status = "";
     }
 
