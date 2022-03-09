@@ -10,4 +10,10 @@ public class CancelReservationCommand implements Command {
         System.out.println("cancelling a reservation");
     }
 
+    @Override
+    public void undo() {
+        // TODO Auto-generated method stub
+
+    }
+
 }
