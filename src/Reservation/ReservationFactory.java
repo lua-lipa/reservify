@@ -1,4 +1,4 @@
-package src.Reservation;
+package Reservation;
 
 public class ReservationFactory {
 
