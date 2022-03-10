@@ -10,7 +10,7 @@ public class App {
         handleUserRequests(ui);
 
         // set up interceptor
-        Dispatcher dispatcher = new Dispatcher();
+        dispatcher dispatcher = new dispatcher();
         interceptor_setup("logging", dispatcher);
     }
 
@@ -44,10 +44,10 @@ public class App {
         scanner.close();
     }
 
-    private static void interceptor_setup(String interceptor_type, Dispatcher dispatcher) {
+    private static void interceptor_setup(String interceptor_type, dispatcher dispatcher) {
         // Concrete and register interceptor with dispatcher
         if (interceptor_type == "logging") {
-            Interceptor concreteInterceptor = new LoggingInterceptor("Method executed");
+            interceptor concreteInterceptor = new loggingInterceptor("Method executed");
             dispatcher.register(concreteInterceptor);
         }
     }
