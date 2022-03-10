@@ -1,4 +1,4 @@
-package src.Booking;
+package Booking;
 
 import java.util.Date;
 
