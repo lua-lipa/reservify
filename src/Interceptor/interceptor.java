@@ -6,3 +6,4 @@ public interface Interceptor {
     public ContextObject getContextObject();
     public String getTriggerEvent();
 }
+
