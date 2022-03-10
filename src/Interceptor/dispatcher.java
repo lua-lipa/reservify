@@ -18,9 +18,11 @@ public class Dispatcher {
         this.interceptors.remove(i);
     }
 
-    public void callback(String event){
+    public void event(String event, String trigger){
         for(int i = 0; i < interceptors.size(); i++){
-            if(this.interceptors.get(i).getTriggerEvent().equals(event)){
+            if(this.interceptors.get(i).getTriggerEvent().equals(trigger)){
+                ContextObject co = this.interceptors.get(i).getContextObject();
+                co.setStatus(event);
                 this.interceptors.get(i).execute();
                 break;
             }

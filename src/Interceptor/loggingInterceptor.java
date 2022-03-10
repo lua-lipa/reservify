@@ -12,6 +12,10 @@ public class LoggingInterceptor implements Interceptor{
         this.co = co;
     }
 
+    public ContextObject getContextObject(){
+        return this.co;
+    }
+
     public void execute(){
         System.out.println(co.getStatus());
     }
