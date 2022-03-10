@@ -1,6 +1,6 @@
-package src.Reservation;
+package Reservation;
 
-import src.Booking.Booking;
+import Booking.Booking;
 
 abstract public class Reservation {
     Booking booking;
