@@ -3,14 +3,15 @@ import java.util.*;
 
 public class dispatcher {
     List<interceptor> interceptors;
+    contextObject co;
     
-    public dispatcher(){
+    public dispatcher(contextObject co){
+        this.co = co;
         this.interceptors = new ArrayList<>();
     }
 
     public void register(interceptor i){
-        contextObject co = new contextObject();
-        i.setContextObject(co);
+        i.setContextObject(this.co);
         this.interceptors.add(i);
     }
   
@@ -18,11 +19,9 @@ public class dispatcher {
         this.interceptors.remove(i);
     }
 
-    public void event(String event, String trigger){
+    public void event(String trigger){
         for(int i = 0; i < interceptors.size(); i++){
             if(this.interceptors.get(i).getTriggerEvent().equals(trigger)){
-                contextObject co = this.interceptors.get(i).getContextObject();
-                co.setStatus(event);
                 this.interceptors.get(i).execute();
                 break;
             }

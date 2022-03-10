@@ -2,11 +2,11 @@ package Command;
 
 import java.util.HashMap;
 
-public class UIToolKit {
+public class UIToolkit {
     private HashMap<Integer, Command> commands;
     private Command undoCommand;
 
-    public UIToolKit() {
+    public UIToolkit() {
         commands = new HashMap<>();
         undoCommand = new NoCommand();
     }
