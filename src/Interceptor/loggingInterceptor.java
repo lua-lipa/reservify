@@ -1,18 +1,18 @@
 package Interceptor;
 
-public class LoggingInterceptor implements Interceptor{
-    ContextObject co;
+public class loggingInterceptor implements interceptor{
+    contextObject co;
     String triggerEvent;
     
-    public LoggingInterceptor(String triggerEvent){
+    public loggingInterceptor(String triggerEvent){
         this.triggerEvent = triggerEvent;
     }
 
-    public void setContextObject(ContextObject co){
+    public void setContextObject(contextObject co){
         this.co = co;
     }
 
-    public ContextObject getContextObject(){
+    public contextObject getContextObject(){
         return this.co;
     }
 
