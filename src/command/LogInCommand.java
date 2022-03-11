@@ -1,4 +1,4 @@
-package src.command;
+package src.Command;
 
 class LogInCommand implements Command {
     Profile profile;

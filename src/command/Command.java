@@ -1,4 +1,4 @@
-package src.command;
+package src.Command;
 
 public interface Command {
     public void execute();
