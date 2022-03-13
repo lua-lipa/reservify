@@ -8,13 +8,13 @@ public class App {
     static contextObject co;
     static dispatcher dispatcher;
     public static void main(String args[]) {
-        UIToolkit ui = setUpUI();
-        handleUserRequests(ui);
-
         // set up interceptor
         co = new contextObject();
         dispatcher = new dispatcher(co);
-        interceptor_setup("logging", dispatcher);
+        interceptor_setup("log", dispatcher);
+        
+        UIToolkit ui = setUpUI();
+        handleUserRequests(ui);
     }
 
     private static UIToolkit setUpUI() {
@@ -52,15 +52,15 @@ public class App {
 
     private static void interceptor_setup(String interceptor_type, dispatcher dispatcher) {
         // Concrete and register interceptor with dispatcher
-        if (interceptor_type == "logging") {
-            interceptor concreteInterceptor = new loggingInterceptor("Method executed");
+        if (interceptor_type == "log") {
+            interceptor concreteInterceptor = new loggingInterceptor("log");
             dispatcher.register(concreteInterceptor);
         }
     }
 
     private static void callback_method_execution(String method){
         co.setStatus(method);
-        dispatcher.event("Method execution");
+        dispatcher.event("log");
         // System.out.println(method);
     }
 }

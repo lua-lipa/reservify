@@ -11,6 +11,9 @@ public class dispatcher {
     }
 
     public void register(interceptor i){
+        if(this.interceptors.size() > 0){
+            this.interceptors.get(this.interceptors.size()-1).setNextChain(i);
+        }
         i.setContextObject(this.co);
         this.interceptors.add(i);
     }
@@ -20,12 +23,7 @@ public class dispatcher {
     }
 
     public void event(String trigger){
-        for(int i = 0; i < interceptors.size(); i++){
-            if(this.interceptors.get(i).getTriggerEvent().equals(trigger)){
-                this.interceptors.get(i).execute();
-                break;
-            }
-        }
+        this.interceptors.get(0).execute(trigger);
     }
 
 }
