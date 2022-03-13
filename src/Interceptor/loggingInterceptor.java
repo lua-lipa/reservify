@@ -3,6 +3,7 @@ package Interceptor;
 public class loggingInterceptor implements interceptor{
     contextObject co;
     String triggerEvent;
+    interceptor nextInChain;
     
     public loggingInterceptor(String triggerEvent){
         this.triggerEvent = triggerEvent;
@@ -12,16 +13,20 @@ public class loggingInterceptor implements interceptor{
         this.co = co;
     }
 
-    public contextObject getContextObject(){
-        return this.co;
-    }
-
-    public void execute(){
-        System.out.println(co.getStatus());
+    public void execute(String request){
+        if(request.equals("log")){
+            System.out.println(co.getStatus());
+        } else {
+            this.nextInChain.execute(request);
+        }
     }
 
     public String getTriggerEvent(){
         return this.triggerEvent;
+    }
+
+    public void setNextChain(interceptor nextInChain){
+        this.nextInChain = nextInChain;
     }
 
 }
