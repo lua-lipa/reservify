@@ -1,21 +1,29 @@
 package Command;
 
+import Reservation.ReservationFactory;
+
 public class ChangeReservationCommand implements Command {
+    private String title;
 
     public ChangeReservationCommand() {
         System.out.println("amending reservation command");
+        this.title = "Change Reservation";
     }
 
     @Override
-    public void execute() {
-        System.out.println("amending reservation");
-
+    public boolean execute(ReservationFactory rf) {
+        System.out.println("amend reservation");
+        return false;
     }
 
     @Override
     public void undo() {
-        // TODO Auto-generated method stub
+        System.out.println("Undo change reservation");
 
+    }
+
+    public String getCommandTitle() {
+        return this.title;
     }
 
 }
