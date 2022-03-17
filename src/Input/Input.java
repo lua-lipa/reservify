@@ -1,3 +1,6 @@
+package Input;
+
+import java.util.Date;
 import java.util.Scanner;
 
 public class Input {
@@ -9,6 +12,23 @@ public class Input {
     public static Input getInstance() {
         return instance;
     }
+
+    public Object requestInputForType(String name, Object type) {
+        System.out.println("Please enter " + name);
+
+        if (type instanceof Integer) {
+            //scan for int
+         } else if (type instanceof String) {
+            //scan for string
+         } else if (type instanceof Date) {
+            //scan for date
+         } else if (type instanceof Double) {
+            //scan for double
+         }
+
+         return "LOL";
+    }
+
 
     //show a prompt
     //wait for valid int
