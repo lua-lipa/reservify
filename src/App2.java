@@ -33,15 +33,12 @@ public class App2 {
 
         boolean sessionExited = false;
         Input input = Input.getInstance();
-        int r1 = input.getInt(rf.getReservationOptions());
-        Reservation res = rf.createReservation(r1);
-        System.out.println("reserved: " + res.getReservationType().toString());
-        res.requestUserInput();
-        ArrayList<ReservationDetail<?>> rds = res.getReservationDetails();
-        for (int i = 0; i < rds.size(); i++) {
-            ReservationDetail<?> r = rds.get(i);
-            System.out.println(r.getValue());
-        }
+
+        // ArrayList<ReservationDetail<?>> rds = res.getReservationDetails();
+        // for (int i = 0; i < rds.size(); i++) {
+        //     ReservationDetail<?> r = rds.get(i);
+        //     System.out.println(r.getValue());
+        // }
 
         //reservation choices
         //array list of input needed

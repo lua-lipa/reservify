@@ -30,25 +30,7 @@ abstract public class Reservation implements Cloneable {
     }
 
     public void requestUserInput() {
-        Input input = Input.getInstance();
-        for (int i = 0; i < ReservationDetails.size(); i++) {
-            ReservationDetail<?> r = ReservationDetails.get(i);
-            String type = r.getType();
-
-            if (type.equals("Integer")) {
-                int res = input.getInt("Enter " + r.getName());
-                r.setValue(res);
-             } else if (type.equals("String")) {
-                String res = input.getString("Enter " + r.getName());
-                r.setValue(res);
-             } else if (type.equals("Double")) {
-                Double res = input.getDouble("Enter " + r.getName());
-                r.setValue(res);
-             } else if (type.equals("Date")) {
-                String res = input.getDate("Enter " + r.getName());
-                r.setValue(res);
-             }
-        }
+        
     }
 
     public ArrayList<ReservationDetail<?>> getReservationDetails() {

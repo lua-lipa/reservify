@@ -1,7 +1,10 @@
 package Command;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import Input.Input;
+import Reservation.ReservationDetail;
 import Reservation.ReservationFactory;
 
 public class UIToolkit {
@@ -36,7 +39,7 @@ public class UIToolkit {
             previousCommand.undo();
         } else {
             previousCommand = command;
-            systemExited = command.execute(rf);
+            systemExited = command.execute(rf, this);
         }
 
         return systemExited;
@@ -50,6 +53,28 @@ public class UIToolkit {
             str += " [" + i + "] " + c.getCommandTitle().toString();
         }
         return str;
+    }
+
+    public void requestUserInput(ArrayList<ReservationDetail<?>> rd) {
+        Input input = Input.getInstance();
+        for (int i = 0; i < rd.size(); i++) {
+            ReservationDetail<?> r = rd.get(i);
+            String type = r.getType();
+
+            if (type.equals("Integer")) {
+                int res = input.getInt("Enter " + r.getName());
+                r.setValue(res);
+             } else if (type.equals("String")) {
+                String res = input.getString("Enter " + r.getName());
+                r.setValue(res);
+             } else if (type.equals("Double")) {
+                Double res = input.getDouble("Enter " + r.getName());
+                r.setValue(res);
+             } else if (type.equals("Date")) {
+                String res = input.getDate("Enter " + r.getName());
+                r.setValue(res);
+             }
+        }
     }
 
     public void registerReservationFactory(ReservationFactory rf) {

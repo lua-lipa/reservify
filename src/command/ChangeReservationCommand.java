@@ -11,7 +11,7 @@ public class ChangeReservationCommand implements Command {
     }
 
     @Override
-    public boolean execute(ReservationFactory rf) {
+    public boolean execute(ReservationFactory rf, UIToolkit ui) {
         System.out.println("amend reservation");
         return false;
     }

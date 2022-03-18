@@ -10,7 +10,7 @@ public class NoCommand implements Command {
         this.title = "";
     }
 
-    public boolean execute(ReservationFactory rf) {
+    public boolean execute(ReservationFactory rf, UIToolkit ui) {
         System.out.println("No Command");
         return false;
     }
