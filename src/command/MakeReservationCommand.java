@@ -15,13 +15,14 @@ public class MakeReservationCommand implements Command {
         this.input = Input.getInstance();
     }
 
-    public boolean execute(ReservationFactory rf) {
+    public boolean execute(ReservationFactory rf, UIToolkit ui) {
         System.out.println("Make Reservation");
         boolean requestHandled = false;
         while (!requestHandled) {
             int r1 = input.getInt(rf.getReservationOptions());
             Reservation res = rf.createReservation(r1);
             System.out.println("reserved: " + res.getReservationType().toString());
+            ui.requestUserInput(res.getReservationDetails());
             requestHandled = true;
         }
 
@@ -36,5 +37,4 @@ public class MakeReservationCommand implements Command {
     public String getCommandTitle() {
         return this.title;
     }
-
 }

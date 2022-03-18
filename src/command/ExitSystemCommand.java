@@ -10,7 +10,7 @@ public class ExitSystemCommand implements Command {
         this.title = "Exit System";
     }
 
-    public boolean execute(ReservationFactory rf) {
+    public boolean execute(ReservationFactory rf, UIToolkit ui) {
         System.out.println("Exiting the system. Thank you for using reservify.");
         return true;
     }

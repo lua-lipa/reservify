@@ -9,7 +9,7 @@ public class CancelReservationCommand implements Command {
         this.title = "Cancel Reservation";
     }
 
-    public boolean execute(ReservationFactory rf) {
+    public boolean execute(ReservationFactory rf, UIToolkit ui) {
         System.out.println("Cancel Reservation");
         return false;
     }

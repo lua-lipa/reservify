@@ -1,6 +1,7 @@
 package Reservation;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ReservationFactory {
     private ArrayList<Reservation> prototypes;
@@ -19,6 +20,20 @@ public class ReservationFactory {
 
     public ArrayList<Reservation> getReservations() {
         return prototypes;
+    }
+
+    public ReservationDetail<?> createReservationDetail(String name, String type) {
+        ReservationDetail<?> rd = new ReservationDetail<>();
+        if (type.equals("Integer")) {
+            rd = new ReservationDetail<Integer>(Integer.class, name, type);
+         } else if (type.equals("String")) {
+            rd = new ReservationDetail<String>(String.class, name, type);
+         } else if (type.equals("Date")) {
+            rd = new ReservationDetail<Date>(Date.class, name, type);
+         } else if (type.equals("Double")) {
+            rd = new ReservationDetail<Double>(Double.class, name, type);
+         }
+         return rd;
     }
 
     public String getReservationOptions() {
