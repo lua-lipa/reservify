@@ -2,37 +2,58 @@ package Command;
 
 import java.util.HashMap;
 
+import Reservation.ReservationFactory;
+
 public class UIToolkit {
+    final int UNDO_INDEX = 0;
     private HashMap<Integer, Command> commands;
-    private Command undoCommand;
+    private Command previousCommand;
+    private ReservationFactory rf;
 
     public UIToolkit() {
         commands = new HashMap<>();
-        undoCommand = new NoCommand();
+        previousCommand = new NoCommand();
+        this.setCommand(UNDO_INDEX, previousCommand);
     }
 
     public void setCommand(int commandIndex, Command command) {
         commands.put(commandIndex, command);
-        System.out.println("command set");
     }
 
     public void setCommands(HashMap<Integer, Command> commands) {
         this.commands = commands;
     }
 
+    private boolean undoButtonPressed(int command_index) {
+        return command_index == UNDO_INDEX;
+    }
+
     public boolean executeCommand(int commandIndex) {
+        boolean systemExited = false;
+
         Command command = commands.get(commandIndex);
-        if (commandIndex == 4) { // undo
-            System.out.println("undoing the previous request");
-            undoCommand.undo();
-        } else if (command == null) {
-            System.out.println("There is no command under the entered index: " + commandIndex);
-            return false;
+        if (undoButtonPressed(commandIndex)) {
+            previousCommand.undo();
+        } else {
+            previousCommand = command;
+            systemExited = command.execute(rf);
         }
-        System.out.println("received command index: " + commandIndex + ": " + command);
-        command.execute();
-        undoCommand = command;
-        return true;
+
+        return systemExited;
+    }
+
+    public String getCommandOptions() {
+        // Command Types: []
+        String str = "Command Types [0] Undo ";
+        for (int i = 1; i < commands.size(); i++) {
+            Command c = commands.get(i);
+            str += " [" + i + "] " + c.getCommandTitle().toString();
+        }
+        return str;
+    }
+
+    public void registerReservationFactory(ReservationFactory rf) {
+        this.rf = rf;
     }
 
 }

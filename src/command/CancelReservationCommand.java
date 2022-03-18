@@ -1,19 +1,26 @@
 package Command;
 
+import Reservation.ReservationFactory;
+
 public class CancelReservationCommand implements Command {
+    private String title;
 
     public CancelReservationCommand() {
-        System.out.println("cancellation constructor");
+        this.title = "Cancel Reservation";
     }
 
-    public void execute() {
-        System.out.println("cancelling a reservation");
+    public boolean execute(ReservationFactory rf) {
+        System.out.println("Cancel Reservation");
+        return false;
     }
 
     @Override
     public void undo() {
-        // TODO Auto-generated method stub
+        System.out.println("Undo cancel reservation");
+    }
 
+    public String getCommandTitle() {
+        return this.title;
     }
 
 }

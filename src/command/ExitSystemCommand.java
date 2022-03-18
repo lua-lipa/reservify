@@ -1,19 +1,28 @@
 package Command;
 
+import Reservation.ReservationFactory;
+
 public class ExitSystemCommand implements Command {
+    private String title;
 
     public ExitSystemCommand() {
         System.out.println("Exit command constructor");
+        this.title = "Exit System";
     }
 
-    public void execute() {
+    public boolean execute(ReservationFactory rf) {
         System.out.println("Exiting the system. Thank you for using reservify.");
+        return true;
     }
 
     @Override
     public void undo() {
-        // TODO Auto-generated method stub
+        System.out.println("Undo exit system");
 
+    }
+
+    public String getCommandTitle() {
+        return this.title;
     }
 
 }
