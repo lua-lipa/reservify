@@ -2,7 +2,6 @@ import java.security.Identity;
 import java.util.ArrayList;
 
 import Command.*;
-import Command.UIToolkit;
 import Input.Input;
 import Reservation.BookReservation;
 import Reservation.LaptopReservation;
@@ -24,11 +23,13 @@ public class App2 {
         Command cancelReservationCommand = new CancelReservationCommand();
         Command changeReservationCommand = new ChangeReservationCommand();
         Command exitSystemCommand = new ExitSystemCommand();
+        Command undoReservationDetailCommand = new UndoReservationDetail();
 
         ui.setCommand(1, makeReservationCommand);
         ui.setCommand(2, cancelReservationCommand);
         ui.setCommand(3, changeReservationCommand);
         ui.setCommand(4, exitSystemCommand);
+        ui.setCommand(5, undoReservationDetailCommand);
         ui.registerReservationFactory(rf);
 
         boolean sessionExited = false;

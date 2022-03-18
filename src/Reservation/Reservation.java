@@ -6,6 +6,7 @@ import java.util.Date;
 import Input.Input;
 
 abstract public class Reservation implements Cloneable {
+    //This is the memento class and ReservationDetails 
     private ArrayList<ReservationDetail<?>> ReservationDetails = new ArrayList<ReservationDetail<?>>();
     
     public Reservation clone() {
@@ -35,5 +36,9 @@ abstract public class Reservation implements Cloneable {
 
     public ArrayList<ReservationDetail<?>> getReservationDetails() {
         return ReservationDetails;
+    }
+
+    public void setReservationDetails(ArrayList<ReservationDetail<?>> rd) {
+        this.ReservationDetails = rd;
     }
 }

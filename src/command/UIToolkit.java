@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import Input.Input;
+import Reservation.Reservation;
 import Reservation.ReservationDetail;
 import Reservation.ReservationFactory;
+
+import Memento.Originator;
+import Memento.Caretaker;
 
 public class UIToolkit {
     final int UNDO_INDEX = 0;
@@ -55,25 +59,33 @@ public class UIToolkit {
         return str;
     }
 
-    public void requestUserInput(ArrayList<ReservationDetail<?>> rd) {
+    public void requestUserInput(Reservation reservation, Originator originator, Caretaker caretaker) {
+        //originator should be called here?
+        ArrayList<ReservationDetail<?>> rd = reservation.getReservationDetails();
         Input input = Input.getInstance();
+        
         for (int i = 0; i < rd.size(); i++) {
             ReservationDetail<?> r = rd.get(i);
             String type = r.getType();
+            originator.setReservationDetail(r);
 
             if (type.equals("Integer")) {
                 int res = input.getInt("Enter " + r.getName());
-                r.setValue(res);
-             } else if (type.equals("String")) {
+                originator.set(res);
+            } else if (type.equals("String")) {
                 String res = input.getString("Enter " + r.getName());
-                r.setValue(res);
-             } else if (type.equals("Double")) {
+                originator.set(res);
+            } else if (type.equals("Double")) {
                 Double res = input.getDouble("Enter " + r.getName());
-                r.setValue(res);
-             } else if (type.equals("Date")) {
+                originator.set(res);
+            } else if (type.equals("Date")) {
                 String res = input.getDate("Enter " + r.getName());
-                r.setValue(res);
-             }
+                originator.set(res);
+            }
+            
+            caretaker.addMemento(originator.storeInMemento(reservation));
+            originator.incrementCurrentReservation();
+            originator.incrementSavedReservations();
         }
     }
 
