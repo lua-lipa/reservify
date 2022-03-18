@@ -1,7 +1,5 @@
 package Reservation;
 
-import java.util.Date;
-
 public class ReservationDetail<T> {
     private Class<T> dataClass;
     private String name;
