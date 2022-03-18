@@ -2,6 +2,9 @@ package Input;
 
 import java.util.Date;
 import java.util.Scanner;
+import java.util.regex.Pattern;
+
+import Reservation.ReservationDetail;
 
 public class Input {
     private static Input instance = new Input();
@@ -13,23 +16,6 @@ public class Input {
         return instance;
     }
 
-    public Object requestInputForType(String name, Object type) {
-        System.out.println("Please enter " + name);
-
-        if (type instanceof Integer) {
-            //scan for int
-         } else if (type instanceof String) {
-            //scan for string
-         } else if (type instanceof Date) {
-            //scan for date
-         } else if (type instanceof Double) {
-            //scan for double
-         }
-
-         return "LOL";
-    }
-
-
     //show a prompt
     //wait for valid int
     public int getInt(String sPrompt) {
@@ -40,6 +26,39 @@ public class Input {
             scanner.nextLine();
         }
         return scanner.nextInt();
+    }
+
+    public double getDouble(String sPrompt) {
+        System.out.println(sPrompt);
+        while(!scanner.hasNextDouble()) {
+            System.out.println("Please print a valid input");
+            System.out.println(sPrompt);
+            scanner.nextLine();
+        }
+        return scanner.nextDouble();
+    }
+
+    public String getString(String sPrompt) {
+        System.out.println(sPrompt);
+        while(!scanner.hasNextLine()) {
+            System.out.println("Please print a valid input");
+            System.out.println(sPrompt);
+            scanner.nextLine();
+        }
+        return scanner.nextLine();
+    }
+
+    public String getDate(String sPrompt) {
+        System.out.println(sPrompt);
+        Pattern pattern = Pattern.compile("^\\d{2}-\\d{2}-\\d{4}", Pattern.MULTILINE);
+        while(!scanner.hasNext(pattern)) {
+            System.out.println("Please print a valid input");
+            System.out.println(sPrompt);
+            scanner.nextLine();
+        }
+
+        //convert string to date
+        return scanner.nextLine();
     }
 
     

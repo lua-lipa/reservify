@@ -2,25 +2,25 @@ package Reservation;
 
 import java.util.Date;
 
-public class ReservationDetail {
+public class ReservationDetail<T> {
+    private Class<T> dataClass;
     private String name;
-    private Object type;
+    private String type;
     private Object value;
-    
-    public ReservationDetail(String name, Object type) {
-        this.name = name;
-        this.type = type;
-    }
 
-    public void castType() {
-        if (this.type instanceof Integer) {
-            this.type = (int) type;
-         } else if (this.type instanceof String) {
-            this.type = (String) type;
-         } else if (type instanceof Date) {
-            this.type = (Date) type;
-         } else if (type instanceof Double) {
-            this.type = (double) type;
+    public ReservationDetail() {}
+    
+    public ReservationDetail(Class<T> dataClass, String name, String type) {
+        if (type.equals("Integer") ||
+            type.equals("String") ||
+            type.equals("Date") ||
+            type.equals("Double")
+        ) {
+            this.type = type;
+            this.name = name;
+            this.dataClass = dataClass;
+         } else {
+             //error
          }
     }
 
@@ -28,12 +28,12 @@ public class ReservationDetail {
         return this.name;
     }
 
-    public Object getType() {
+    public String getType() {
         return this.type;
     }
 
-    public Object getValue() {
-        return this.value;
+    public T getValue() {
+        return dataClass.cast(this.value);
     }
 
     public void setValue(Object value) {
