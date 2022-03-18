@@ -27,7 +27,9 @@ abstract public class Reservation implements Cloneable {
         //type must be Integer, String, Double or Date
         ReservationFactory rf = new ReservationFactory();
         ReservationDetail<?> rd = rf.createReservationDetail("name", "Integer");
+        ReservationDetail<?> rd_2 = rf.createReservationDetail("age", "Integer");
         ReservationDetails.add(rd);
+        ReservationDetails.add(rd_2);
     }
 
     public void requestUserInput() {

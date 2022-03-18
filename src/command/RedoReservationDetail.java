@@ -8,19 +8,17 @@ import java.util.ArrayList;
 
 import Memento.Caretaker;
 
-public class UndoReservationDetail implements Command{
+public class RedoReservationDetail implements Command{
     public boolean execute(ReservationFactory rf, UIToolkit ui){
         System.out.println("You shouldn't be using this execute method babes.");
         return true;
     }
 
     public boolean mementoExecute(Originator originator, Caretaker caretaker, UIToolkit ui, Reservation reservation){
-        if(originator.getCurrentReservationIndex() >= 1){
-			originator.decrementCurrentReservation();
-            int ind = originator.getCurrentReservationIndex();
-            ArrayList<ReservationDetail<?>> res = originator.restoreFromMemento(caretaker.getMemento(ind));
+        if((originator.getSavedReservationsIndex() - 1) > originator.getCurrentReservationIndex()){
+            originator.incrementCurrentReservation();
+            ArrayList<ReservationDetail<?>> res = originator.restoreFromMemento(caretaker.getMemento(originator.getCurrentReservationIndex()));
             reservation.setReservationDetails(res);
-            //call something to print out the details
         } else {
             System.out.println("You must make a reservation first.");
         }
@@ -29,5 +27,5 @@ public class UndoReservationDetail implements Command{
 
     public void undo(){}
 
-    public String getCommandTitle(){return "Undo Reservation Detail";}
+    public String getCommandTitle(){return "Redo Reservation Detail";}
 }

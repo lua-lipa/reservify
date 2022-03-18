@@ -1,5 +1,8 @@
 package Command;
 
+import Memento.Caretaker;
+import Memento.Originator;
+import Reservation.Reservation;
 import Reservation.ReservationFactory;
 
 public class NoCommand implements Command {
@@ -13,6 +16,11 @@ public class NoCommand implements Command {
     public boolean execute(ReservationFactory rf, UIToolkit ui) {
         System.out.println("No Command");
         return false;
+    }
+
+    public boolean mementoExecute(Originator originator, Caretaker caretaker, UIToolkit ui, Reservation reservation){
+        System.out.println("You shouldn't be using this execute method babes.");
+        return true;
     }
 
     public void undo() {

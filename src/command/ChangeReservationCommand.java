@@ -1,5 +1,8 @@
 package Command;
 
+import Memento.Caretaker;
+import Memento.Originator;
+import Reservation.Reservation;
 import Reservation.ReservationFactory;
 
 public class ChangeReservationCommand implements Command {
@@ -14,6 +17,11 @@ public class ChangeReservationCommand implements Command {
     public boolean execute(ReservationFactory rf, UIToolkit ui) {
         System.out.println("amend reservation");
         return false;
+    }
+
+    public boolean mementoExecute(Originator originator, Caretaker caretaker, UIToolkit ui, Reservation reservation){
+        System.out.println("You shouldn't be using this execute method babes.");
+        return true;
     }
 
     @Override

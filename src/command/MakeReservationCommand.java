@@ -10,6 +10,7 @@ public class MakeReservationCommand implements Command {
 
     private String title;
     private Input input;
+    private Reservation res;
 
     public MakeReservationCommand() {
         System.out.println("reservation constructor");
@@ -25,7 +26,7 @@ public class MakeReservationCommand implements Command {
         
         while (!requestHandled) {
             int r1 = input.getInt(rf.getReservationOptions());
-            Reservation res = rf.createReservation(r1);
+            this.res = rf.createReservation(r1);
             caretaker.addMemento(originator.storeInMemento(res));
             originator.incrementCurrentReservation();
             originator.incrementSavedReservations();
@@ -35,6 +36,11 @@ public class MakeReservationCommand implements Command {
         }
 
         return false;
+    }
+
+    public boolean mementoExecute(Originator originator, Caretaker caretaker, UIToolkit ui, Reservation reservation){
+        System.out.println("You shouldn't be using this execute method babes.");
+        return true;
     }
 
     @Override

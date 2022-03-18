@@ -14,11 +14,16 @@ import Memento.Caretaker;
 public class UIToolkit {
     final int UNDO_INDEX = 0;
     private HashMap<Integer, Command> commands;
+    private HashMap<Integer, Command> mementoCommands;
     private Command previousCommand;
     private ReservationFactory rf;
+    private Reservation reservation;
+    private Originator originator;
+    private Caretaker caretaker;
 
     public UIToolkit() {
         commands = new HashMap<>();
+        mementoCommands = new HashMap<>();
         previousCommand = new NoCommand();
         this.setCommand(UNDO_INDEX, previousCommand);
     }
@@ -27,8 +32,16 @@ public class UIToolkit {
         commands.put(commandIndex, command);
     }
 
+    public void setMementoCommand(int commandIndex, Command command) {
+        mementoCommands.put(commandIndex, command);
+    }
+
     public void setCommands(HashMap<Integer, Command> commands) {
         this.commands = commands;
+    }
+
+    public void setMementoCommands(HashMap<Integer, Command> mementoCommands) {
+        this.mementoCommands = mementoCommands;
     }
 
     private boolean undoButtonPressed(int command_index) {
@@ -49,6 +62,12 @@ public class UIToolkit {
         return systemExited;
     }
 
+    public boolean executeMementoCommand(int commandIndex) {
+        Command command = mementoCommands.get(commandIndex);
+        boolean systemExited = command.mementoExecute(originator, caretaker, this, reservation);
+        return systemExited;
+    }
+
     public String getCommandOptions() {
         // Command Types: []
         String str = "Command Types [0] Undo ";
@@ -59,12 +78,28 @@ public class UIToolkit {
         return str;
     }
 
-    public void requestUserInput(Reservation reservation, Originator originator, Caretaker caretaker) {
+    public String getMementoCommandOptions() {
+        // Command Types: []
+        String str = "Command Types ";
+        for (int i = 0; i < mementoCommands.size(); i++) {
+            Command c = mementoCommands.get(i);
+            str += " [" + i + "] " + c.getCommandTitle().toString();
+        }
+        str += " [" + 1 + "] continue";
+        return str;
+    }
+
+    public void requestUserInput(Reservation newReservation, Originator newOriginator, Caretaker newCaretaker) {
         //originator should be called here?
+        this.reservation = newReservation;
+        this.originator = newOriginator;
+        this.caretaker = newCaretaker;
         ArrayList<ReservationDetail<?>> rd = reservation.getReservationDetails();
         Input input = Input.getInstance();
+        boolean wait;
         
         for (int i = 0; i < rd.size(); i++) {
+            wait = true;
             ReservationDetail<?> r = rd.get(i);
             String type = r.getType();
             originator.setReservationDetail(r);
@@ -86,6 +121,26 @@ public class UIToolkit {
             caretaker.addMemento(originator.storeInMemento(reservation));
             originator.incrementCurrentReservation();
             originator.incrementSavedReservations();
+
+            while(wait){
+                int command_index = input.getInt(getMementoCommandOptions());
+                boolean sessionExited = true;
+                if(command_index == 0){
+                    i--;
+                    sessionExited = executeMementoCommand(command_index);
+                } else {
+                    wait = false;
+                }
+                if(sessionExited){
+                    System.out.println("Reservation Details: ");
+                    for (int j = 0; j < rd.size(); j++) {
+                        ReservationDetail<?> reservationDetail = rd.get(j);
+                        reservationDetail.print();
+                    }
+                    wait = false;
+                }
+            }
+
         }
     }
 
