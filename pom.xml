@@ -24,7 +24,7 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
   
   
     <build>
-        <finalName>maven-unit-test</finalName>
+        <finalName>AppTest</finalName>
         <plugins>
 
             <plugin>
