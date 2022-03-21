@@ -1,8 +1,8 @@
-package main.java.Database;
+package Database;
 
 import java.util.ArrayList;
 
-import main.java.Reservation.Reservation;
+import Reservation.Reservation;
 
 public class Reservations {
 

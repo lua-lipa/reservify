@@ -1,11 +1,11 @@
-package main.java.Command;
+package Command;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import main.java.Input.Input;
-import main.java.Reservation.ReservationDetail;
-import main.java.Reservation.ReservationFactory;
+import Input.Input;
+import Reservation.ReservationDetail;
+import Reservation.ReservationFactory;
 
 public class UIToolkit {
     final int UNDO_INDEX = 0;

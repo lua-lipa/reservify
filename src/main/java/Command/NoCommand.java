@@ -1,6 +1,6 @@
-package main.java.Command;
+package Command;
 
-import main.java.Reservation.ReservationFactory;
+import Reservation.ReservationFactory;
 
 public class NoCommand implements Command {
     private String title;

@@ -1,16 +1,16 @@
-package main.java;
+import Booking.*;
 
 import java.security.Identity;
 import java.util.ArrayList;
 
-import main.java.Command.*;
-import main.java.Input.Input;
-import main.java.Reservation.BookReservation;
-import main.java.Reservation.LaptopReservation;
-import main.java.Reservation.Reservation;
-import main.java.Reservation.ReservationDetail;
-import main.java.Reservation.ReservationFactory;
-import main.java.Reservation.RoomReservation;
+import Command.*;
+import Input.Input;
+import Reservation.BookReservation;
+import Reservation.LaptopReservation;
+import Reservation.Reservation;
+import Reservation.ReservationDetail;
+import Reservation.ReservationFactory;
+import Reservation.RoomReservation;
 
 public class App2 {
     public static void main(String[] args) throws Exception {

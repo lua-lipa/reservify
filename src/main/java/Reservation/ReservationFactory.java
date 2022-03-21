@@ -1,4 +1,4 @@
-package main.java.Reservation;
+package Reservation;
 
 import java.util.ArrayList;
 import java.util.Date;

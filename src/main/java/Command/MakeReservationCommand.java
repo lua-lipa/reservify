@@ -1,8 +1,8 @@
-package main.java.Command;
+package Command;
 
-import main.java.Input.Input;
-import main.java.Reservation.Reservation;
-import main.java.Reservation.ReservationFactory;
+import Input.Input;
+import Reservation.Reservation;
+import Reservation.ReservationFactory;
 
 public class MakeReservationCommand implements Command {
 

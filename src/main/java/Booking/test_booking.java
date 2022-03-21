@@ -1,4 +1,4 @@
-package main.java.Booking;
+package Booking;
 
 public class test_booking {
     public static void main(String[] args) {

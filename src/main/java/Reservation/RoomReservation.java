@@ -1,4 +1,4 @@
-package main.java.Reservation;
+package Reservation;
 
 public class RoomReservation extends Reservation {
     private String reservationType = "Room";

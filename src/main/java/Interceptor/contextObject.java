@@ -1,4 +1,4 @@
-package main.java.Interceptor;
+package Interceptor;
 
 public class contextObject {
     String status;
