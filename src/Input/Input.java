@@ -45,7 +45,7 @@ public class Input {
             System.out.println(sPrompt);
             scanner.nextLine();
         }
-        return scanner.nextLine();
+        return scanner.next();
     }
 
     public String getDate(String sPrompt) {
@@ -58,7 +58,7 @@ public class Input {
         }
 
         //convert string to date
-        return scanner.nextLine();
+        return scanner.next();
     }
 
     
