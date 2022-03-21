@@ -1,4 +1,4 @@
-package main.java.Reservation;
+package Reservation;
 
 public class ReservationDetail<T> {
     private Class<T> dataClass;

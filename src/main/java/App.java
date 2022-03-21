@@ -1,9 +1,8 @@
-package main.java;
 
 import java.util.Scanner;
 
-import main.java.Command.*;
-import main.java.Interceptor.*;
+import Command.*;
+import Interceptor.*;
 
 public class App {
     static contextObject co;

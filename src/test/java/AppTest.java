@@ -1,4 +1,3 @@
-package test.java;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,11 +5,11 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import main.java.Booking.Booking;
-import main.java.Booking.EarlyBooking;
-import main.java.Command.Command;
-import main.java.Command.ExitSystemCommand;
-import main.java.Command.MakeReservationCommand;
+import Booking.Booking;
+import Booking.EarlyBooking;
+import Command.Command;
+import Command.ExitSystemCommand;
+import Command.MakeReservationCommand;
 
 public class AppTest {
     @Test

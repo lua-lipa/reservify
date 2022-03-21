@@ -1,9 +1,9 @@
-package main.java.Reservation;
+package Reservation;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-import main.java.Input.Input;
+import Input.Input;
 
 /*
 int

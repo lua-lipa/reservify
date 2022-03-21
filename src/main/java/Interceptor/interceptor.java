@@ -1,4 +1,4 @@
-package main.java.Interceptor;
+package Interceptor;
 
 public interface interceptor {
     public void execute(String request);
