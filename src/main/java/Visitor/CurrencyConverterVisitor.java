@@ -1,4 +1,4 @@
-package visitor;
+package Visitor;
 
 import org.json.JSONObject;
 
