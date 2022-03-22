@@ -1,5 +1,7 @@
 package Reservation;
 
+import java.time.LocalDateTime;
+
 import Event.Event;
 
 public class ReservationDetail<T> {
@@ -21,6 +23,8 @@ public class ReservationDetail<T> {
             this.name = name;
             this.dataClass = dataClass;
             this.event = event;
+            this.event.setEventInfo("In ReservationDetail class", "Creating a reservation detail object", LocalDateTime.now());
+            this.event.trigger();
         } else {
             // error
         }

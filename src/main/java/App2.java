@@ -20,7 +20,7 @@ public class App2 {
         // System.out.println("Hello, World!");
 
         interceptor logging = new loggingInterceptor("log");
-        interceptor welcome = new loggingInterceptor("welcome");
+        interceptor welcome = new welcomeInterceptor("welcome");
         contextObject co = new contextObject();
         dispatcher dispatcher = new dispatcher(co);
         dispatcher.register(logging);
@@ -34,7 +34,7 @@ public class App2 {
 
         ReservationFactory rf = new ReservationFactory(event);
         rf.registerReservation(new BookReservation(event));
-        rf.registerReservation(new LaptopReservation());
+        rf.registerReservation(new LaptopReservation(event));
         rf.registerReservation(new RoomReservation());
 
         UIToolkit ui = new UIToolkit();

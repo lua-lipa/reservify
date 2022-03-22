@@ -41,19 +41,19 @@ public class ReservationFactory {
         if (type.equals("Integer")) {
             this.event.setEventInfo("In ReservationFactory class", "Reservation detail created is of type Integer", LocalDateTime.now());
             this.event.trigger();
-            rd = new ReservationDetail<Integer>(Integer.class, name, type);
+            rd = new ReservationDetail<Integer>(Integer.class, name, type, event);
         } else if (type.equals("String")) {
             this.event.setEventInfo("In ReservationFactory class", "Reservation detail created is of type String", LocalDateTime.now());
             this.event.trigger();
-            rd = new ReservationDetail<String>(String.class, name, type);
+            rd = new ReservationDetail<String>(String.class, name, type, event);
         } else if (type.equals("Date")) {
             this.event.setEventInfo("In ReservationFactory class", "Reservation detail created is of type Date", LocalDateTime.now());
             this.event.trigger();
-            rd = new ReservationDetail<Date>(Date.class, name, type);
+            rd = new ReservationDetail<Date>(Date.class, name, type, event);
         } else if (type.equals("Double")) {
             this.event.setEventInfo("In ReservationFactory class", "Reservation detail created is of type Double", LocalDateTime.now());
             this.event.trigger();
-            rd = new ReservationDetail<Double>(Double.class, name, type);
+            rd = new ReservationDetail<Double>(Double.class, name, type, event);
         }
         return rd;
     }

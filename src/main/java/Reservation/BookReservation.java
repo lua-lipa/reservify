@@ -38,8 +38,6 @@ public class BookReservation extends Reservation {
 
     @Override
     public String getReservationType() {
-        this.event.setEventInfo("In BookReservation class", "Getting reservation type", LocalDateTime.now());
-        this.event.trigger();
         return reservationType;
     }
 

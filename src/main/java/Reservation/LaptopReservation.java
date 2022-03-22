@@ -9,6 +9,7 @@ public class LaptopReservation extends Reservation {
     private Event event;
 
     public LaptopReservation(Event event) {
+        this.event = event;
         this.event.setEventInfo("In LaptopReservation class", "Creating a laptop reservation object", LocalDateTime.now());
         this.event.trigger();
     }
@@ -19,8 +20,6 @@ public class LaptopReservation extends Reservation {
 
     @Override
     public String getReservationType() {
-        this.event.setEventInfo("In LaptopReservation class", "Getting reservation type", LocalDateTime.now());
-        this.event.trigger();
         return reservationType;
     }
 
