@@ -1,15 +1,18 @@
 package Reservation;
 
+import Event.Event;
+
 public class ReservationDetail<T> {
     private Class<T> dataClass;
     private String name;
     private String type;
     private Object value;
+    private Event event;
 
     public ReservationDetail() {
     }
 
-    public ReservationDetail(Class<T> dataClass, String name, String type) {
+    public ReservationDetail(Class<T> dataClass, String name, String type, Event event) {
         if (type.equals("Integer") ||
                 type.equals("String") ||
                 type.equals("Date") ||
@@ -17,6 +20,7 @@ public class ReservationDetail<T> {
             this.type = type;
             this.name = name;
             this.dataClass = dataClass;
+            this.event = event;
         } else {
             // error
         }
