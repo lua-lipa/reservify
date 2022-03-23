@@ -42,11 +42,13 @@ public class App2 {
         Command cancelReservationCommand = new CancelReservationCommand(event);
         Command changeReservationCommand = new ChangeReservationCommand(event);
         Command exitSystemCommand = new ExitSystemCommand(event);
+        Command undoReservationDetailCommand = new UndoReservationDetail();
 
         ui.setCommand(1, makeReservationCommand);
         ui.setCommand(2, cancelReservationCommand);
         ui.setCommand(3, changeReservationCommand);
         ui.setCommand(4, exitSystemCommand);
+        ui.setMementoCommand(undoReservationDetailCommand);
         ui.registerReservationFactory(rf);
 
         boolean sessionExited = false;

@@ -45,4 +45,14 @@ public class ReservationDetail<T> {
     public void setValue(Object value) {
         this.value = value;
     }
+
+    public void print(){
+        String str = "";
+        if(getValue() == null){
+            str = getName() + ": null";
+        } else {
+            str = getName() + ": " + getValue().toString();
+        }
+        System.out.println(str);
+    }
 }
