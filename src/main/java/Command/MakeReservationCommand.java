@@ -28,8 +28,8 @@ public class MakeReservationCommand implements Command {
         this.event.setEventInfo("In MakeReservationCommand class", "Executing the command to make a reservation", LocalDateTime.now());
         this.event.trigger();
         boolean requestHandled = false;
-        Originator originator = new Originator();
-        Caretaker caretaker = new Caretaker();
+        Originator originator = new Originator(this.event);
+        Caretaker caretaker = new Caretaker(this.event);
         while (!requestHandled) {
             int r1 = input.getInt(rf.getReservationOptions());
             this.res = rf.createReservation(r1);
