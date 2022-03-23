@@ -13,7 +13,8 @@ public class dispatcher {
 
     public void register(interceptor i) {
         if (this.interceptors.size() > 0) {
-            this.interceptors.get(this.interceptors.size() - 1).setNextChain(i);
+            int index = this.interceptors.size() - 1;
+            this.interceptors.get(index).setNextChain(i);
         }
         i.setContextObject(this.co);
         this.interceptors.add(i);

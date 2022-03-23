@@ -19,9 +19,6 @@ public class App {
     }
 
     private static UIToolkit setUpUI() {
-        // interceptor
-        callback_method_execution("Setting up UI in setUpUI()");
-
         UIToolkit uiToolKit = new UIToolkit();
 
         Command makeReservationCommand = new MakeReservationCommand();
@@ -57,11 +54,5 @@ public class App {
             interceptor concreteInterceptor = new loggingInterceptor("log");
             dispatcher.register(concreteInterceptor);
         }
-    }
-
-    private static void callback_method_execution(String method) {
-        co.setStatus(method);
-        dispatcher.event("log");
-        // System.out.println(method);
     }
 }

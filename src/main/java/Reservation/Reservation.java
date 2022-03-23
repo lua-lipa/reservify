@@ -3,6 +3,7 @@ package Reservation;
 import java.util.ArrayList;
 import java.util.Date;
 
+import Event.Event;
 import Input.Input;
 
 abstract public class Reservation implements Cloneable {
@@ -22,9 +23,9 @@ abstract public class Reservation implements Cloneable {
 
     public abstract String getReservationType();
 
-    public void createDetail(String name, String type) {
+    public void createDetail(String name, String type, Event event) {
         // type must be Integer, String, Double or Date
-        ReservationFactory rf = new ReservationFactory();
+        ReservationFactory rf = new ReservationFactory(event);
         ReservationDetail<?> rd = rf.createReservationDetail("name", "Integer");
         ReservationDetails.add(rd);
     }

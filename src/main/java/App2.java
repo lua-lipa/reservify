@@ -1,6 +1,7 @@
 import Booking.*;
 
 import java.security.Identity;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import Command.*;
@@ -11,20 +12,36 @@ import Reservation.Reservation;
 import Reservation.ReservationDetail;
 import Reservation.ReservationFactory;
 import Reservation.RoomReservation;
+import Interceptor.*;
+import Event.*;
 
 public class App2 {
     public static void main(String[] args) throws Exception {
         // System.out.println("Hello, World!");
-        ReservationFactory rf = new ReservationFactory();
-        rf.registerReservation(new BookReservation());
-        rf.registerReservation(new LaptopReservation());
-        rf.registerReservation(new RoomReservation());
 
-        UIToolkit ui = new UIToolkit();
-        Command makeReservationCommand = new MakeReservationCommand();
-        Command cancelReservationCommand = new CancelReservationCommand();
-        Command changeReservationCommand = new ChangeReservationCommand();
-        Command exitSystemCommand = new ExitSystemCommand();
+        interceptor logging = new loggingInterceptor("log");
+        interceptor welcome = new welcomeInterceptor("welcome");
+        contextObject co = new contextObject();
+        dispatcher dispatcher = new dispatcher(co);
+        dispatcher.register(logging);
+        dispatcher.register(welcome);
+
+        Event event = new LoggingEvent(co, dispatcher);
+        Event welcomeEvent = new WelcomeEvent(co, dispatcher);
+
+        welcomeEvent.setEventInfo("In Main class", "Welcome to Reservify, please create a reservation or amend an existing one.", LocalDateTime.now());
+        welcomeEvent.trigger();
+
+        ReservationFactory rf = new ReservationFactory(event);
+        rf.registerReservation(new BookReservation(event));
+        rf.registerReservation(new LaptopReservation(event));
+        rf.registerReservation(new RoomReservation(event));
+
+        UIToolkit ui = new UIToolkit(event);
+        Command makeReservationCommand = new MakeReservationCommand(event);
+        Command cancelReservationCommand = new CancelReservationCommand(event);
+        Command changeReservationCommand = new ChangeReservationCommand(event);
+        Command exitSystemCommand = new ExitSystemCommand(event);
 
         ui.setCommand(1, makeReservationCommand);
         ui.setCommand(2, cancelReservationCommand);
