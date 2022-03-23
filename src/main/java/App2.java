@@ -35,13 +35,13 @@ public class App2 {
         ReservationFactory rf = new ReservationFactory(event);
         rf.registerReservation(new BookReservation(event));
         rf.registerReservation(new LaptopReservation(event));
-        rf.registerReservation(new RoomReservation());
+        rf.registerReservation(new RoomReservation(event));
 
-        UIToolkit ui = new UIToolkit();
-        Command makeReservationCommand = new MakeReservationCommand();
-        Command cancelReservationCommand = new CancelReservationCommand();
-        Command changeReservationCommand = new ChangeReservationCommand();
-        Command exitSystemCommand = new ExitSystemCommand();
+        UIToolkit ui = new UIToolkit(event);
+        Command makeReservationCommand = new MakeReservationCommand(event);
+        Command cancelReservationCommand = new CancelReservationCommand(event);
+        Command changeReservationCommand = new ChangeReservationCommand(event);
+        Command exitSystemCommand = new ExitSystemCommand(event);
 
         ui.setCommand(1, makeReservationCommand);
         ui.setCommand(2, cancelReservationCommand);

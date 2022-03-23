@@ -1,22 +1,30 @@
 package Command;
 
+import java.time.LocalDateTime;
+
+import Event.Event;
 import Reservation.ReservationFactory;
 
 public class NoCommand implements Command {
     private String title;
+    private Event event;
 
-    public NoCommand() {
-        System.out.println("No command constructor");
+    public NoCommand(Event event) {
+        this.event = event;
+        this.event.setEventInfo("In NoCommand class", "Creating No Command object", LocalDateTime.now());
+        this.event.trigger();
         this.title = "";
     }
 
     public boolean execute(ReservationFactory rf, UIToolkit ui) {
-        System.out.println("No Command");
+        this.event.setEventInfo("In NoCommand class", "Executing No Command", LocalDateTime.now());
+        this.event.trigger();
         return false;
     }
 
     public void undo() {
-        System.out.println("Undo no command");
+        this.event.setEventInfo("In NoCommand class", "Undoing No Command", LocalDateTime.now());
+        this.event.trigger();
     }
 
     public String getCommandTitle() {
