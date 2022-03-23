@@ -1,7 +1,5 @@
 package Visitor;
 
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,10 +11,46 @@ import java.util.Scanner;
 
 import Reservation.Reservation;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /** CONVERTING FROM EURO ALWAYS */
 public class CurrencyConverterVisitor implements Visitor {
 
-    public static void main(String[] args) {
+    /** Uncomment this block to test and comment the Reservation visit */
+    // public static void main(String[] args) throws JSONException {
+    // HashMap<Integer, String> currencyCode = new HashMap<Integer, String>();
+    // String fromCode = "EUR";
+    // String toCode;
+    // double amount = 50.0;
+
+    // int to;
+    // currencyCode.put(1, "USD");
+    // currencyCode.put(2, "GBP");
+    // fromCode = "EUR";
+
+    // Scanner sc = new Scanner(System.in);
+
+    // System.out.println("Enter the currency code \n1.USD\n2:GBP");
+    // to = sc.nextInt();
+
+    // while (to < 1 || to > 2) {
+    // System.out.println("Enter a valid currency code \n1.USB\n2:GBP");
+    // to = sc.nextInt();
+    // }
+
+    // toCode = currencyCode.get(to);
+
+    // try {
+    // sendHttpRequest(toCode, fromCode, amount);
+    // } catch (IOException e) {
+    // e.printStackTrace();
+    // }
+
+    // sc.close();
+    // }
+
+    public void visit(Reservation reservation) {
         HashMap<Integer, String> currencyCode = new HashMap<Integer, String>();
         String fromCode = "EUR";
         String toCode;
@@ -43,43 +77,20 @@ public class CurrencyConverterVisitor implements Visitor {
             sendHttpRequest(toCode, fromCode, amount);
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
         sc.close();
     }
 
-    public void visit(Reservation reservation) {
-        // currencyCode.put(1, "USD");
-        // currencyCode.put(2, "GBP");
-        // fromCode = "EUR";
-
-        // Scanner sc = new Scanner(System.in);
-
-        // System.out.println("Enter the currency code \n1.USD\n2:GBP");
-        // to = sc.nextInt();
-
-        // while (to < 1 || to > 2) {
-        // System.out.println("Enter a valid currency code \n1.USB\n2:GBP");
-        // to = sc.nextInt();
-        // }
-
-        // toCode = currencyCode.get(to);
-
-        // try {
-        // sendHttpRequest(toCode, fromCode);
-        // } catch (IOException e) {
-        // e.printStackTrace();
-        // }
-
-        // sc.close();
-    }
-
-    private static void sendHttpRequest(String toCode, String fromCode, Double amount) throws IOException {
+    private static void sendHttpRequest(String toCode, String fromCode, Double amount)
+            throws IOException, JSONException {
 
         DecimalFormat f = new DecimalFormat("##.##");
 
-        String GET_URL = "http://api.exchangeratesapi.io/v1/latest?access_key=8a5f8ba3848b3465acc60e4716b329ec&base="
-                + toCode + "&symbols=" + fromCode;
+        String GET_URL = "https://free.currconv.com/api/v7/convert?q=" + fromCode + "_" + toCode
+                + "&compact=ultra&apiKey=0b3396e0a286dc202ca5";
         URL url = new URL(GET_URL);
 
         HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -98,8 +109,14 @@ public class CurrencyConverterVisitor implements Visitor {
             in.close();
 
             JSONObject jsonObj = new JSONObject(response.toString());
-            Double exchangeRate = jsonObj.getJSONObject("rates").getDouble(fromCode);
-            System.out.println(f.format(amount) + fromCode + " = " + f.format(amount / exchangeRate) + toCode);
+
+            String fullCode = fromCode + "_" + toCode;
+
+            Double exchangeRate = jsonObj.getDouble(fullCode);
+            System.out.println(f.format(exchangeRate * amount));
+
+            // System.out.println(f.format(amount) + fromCode + " = " + f.format(amount /
+            // exchangeRate) + toCode);
         } else {
             System.out.println("GET request failed");
         }
