@@ -42,7 +42,7 @@ public class App2 {
         Command cancelReservationCommand = new CancelReservationCommand(event);
         Command changeReservationCommand = new ChangeReservationCommand(event);
         Command exitSystemCommand = new ExitSystemCommand(event);
-        Command undoReservationDetailCommand = new UndoReservationDetail();
+        Command undoReservationDetailCommand = new UndoReservationDetail(event);
 
         ui.setCommand(1, makeReservationCommand);
         ui.setCommand(2, cancelReservationCommand);
