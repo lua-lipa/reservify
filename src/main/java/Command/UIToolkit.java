@@ -6,15 +6,22 @@ import java.util.HashMap;
 
 import Event.Event;
 import Input.Input;
+import Reservation.Reservation;
 import Reservation.ReservationDetail;
 import Reservation.ReservationFactory;
+import Memento.Originator;
+import Memento.Caretaker;
 
 public class UIToolkit {
     final int UNDO_INDEX = 0;
     private HashMap<Integer, Command> commands;
     private Command previousCommand;
+    private Command mementoCommand;
     private ReservationFactory rf;
     private Event event;
+    private Reservation reservation;
+    private Originator originator;
+    private Caretaker caretaker;
 
     public UIToolkit(Event event) {
         this.event = event;
@@ -22,6 +29,7 @@ public class UIToolkit {
         this.event.trigger();
         commands = new HashMap<>();
         previousCommand = new NoCommand(event);
+        mementoCommand = new NoCommand(event);
         this.setCommand(UNDO_INDEX, previousCommand);
     }
 
@@ -29,6 +37,10 @@ public class UIToolkit {
         this.event.setEventInfo("In UIToolkit class", "Adding a command to the commands hashmap", LocalDateTime.now());
         this.event.trigger();
         commands.put(commandIndex, command);
+    }
+
+    public void setMementoCommand(Command command) {
+        this.mementoCommand = command;
     }
 
     public void setCommands(HashMap<Integer, Command> commands) {
@@ -59,6 +71,11 @@ public class UIToolkit {
         return systemExited;
     }
 
+    public boolean executeMementoCommand() {
+        boolean systemExited = mementoCommand.mementoExecute(originator, caretaker, this, reservation);
+        return systemExited;
+    }
+
     public String getCommandOptions() {
         this.event.setEventInfo("In UIToolkit class", "Outputting command options", LocalDateTime.now());
         this.event.trigger();
@@ -71,26 +88,65 @@ public class UIToolkit {
         return str;
     }
 
-    public void requestUserInput(ArrayList<ReservationDetail<?>> rd) {
+    public String getMementoCommandOptions() {
+        // Command Types: []
+        String str = "Command Types ";
+        str += " [" + 0 + "] " + mementoCommand.getCommandTitle().toString();
+        str += " [" + 1 + "] continue";
+        return str;
+    }
+
+    public void requestUserInput(Reservation newReservation, Originator newOriginator, Caretaker newCaretaker) {
         this.event.setEventInfo("In UIToolkit class", "Setting up input to request user input", LocalDateTime.now());
         this.event.trigger();
+        this.reservation = newReservation;
+        this.originator = newOriginator;
+        this.caretaker = newCaretaker;
+        ArrayList<ReservationDetail<?>> rd = reservation.getReservationDetails();
         Input input = Input.getInstance();
+        boolean wait;
+
         for (int i = 0; i < rd.size(); i++) {
+            wait = true;
             ReservationDetail<?> r = rd.get(i);
             String type = r.getType();
+            originator.setReservationDetail(r);
 
             if (type.equals("Integer")) {
                 int res = input.getInt("Enter " + r.getName());
-                r.setValue(res);
+                originator.set(res);
             } else if (type.equals("String")) {
                 String res = input.getString("Enter " + r.getName());
-                r.setValue(res);
+                originator.set(res);
             } else if (type.equals("Double")) {
                 Double res = input.getDouble("Enter " + r.getName());
-                r.setValue(res);
+                originator.set(res);
             } else if (type.equals("Date")) {
                 String res = input.getDate("Enter " + r.getName());
-                r.setValue(res);
+                originator.set(res);
+            }
+            
+            caretaker.addMemento(originator.storeInMemento(reservation));
+            originator.incrementCurrentReservation();
+            originator.incrementSavedReservations();
+
+            while(wait){
+                int command_index = input.getInt(getMementoCommandOptions());
+                boolean sessionExited = true;
+                if(command_index == 0){
+                    i--;
+                    sessionExited = executeMementoCommand();
+                } else {
+                    wait = false;
+                }
+                if(sessionExited){
+                    System.out.println("Reservation Details: ");
+                    for (int j = 0; j < rd.size(); j++) {
+                        ReservationDetail<?> reservationDetail = rd.get(j);
+                        reservationDetail.print();
+                    }
+                    wait = false;
+                }
             }
         }
     }

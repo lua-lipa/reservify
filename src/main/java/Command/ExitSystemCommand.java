@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 
 import Event.Event;
 import Reservation.ReservationFactory;
+import Memento.Caretaker;
+import Memento.Originator;
+import Reservation.Reservation;
 
 public class ExitSystemCommand implements Command {
     private String title;
@@ -19,6 +22,11 @@ public class ExitSystemCommand implements Command {
     public boolean execute(ReservationFactory rf, UIToolkit ui) {
         this.event.setEventInfo("In ExitSystemCommand class", "Executing the command and exiting system", LocalDateTime.now());
         this.event.trigger();
+        return true;
+    }
+
+    public boolean mementoExecute(Originator originator, Caretaker caretaker, UIToolkit ui, Reservation reservation){
+        System.out.println("You shouldn't be using this execute method babes.");
         return true;
     }
 

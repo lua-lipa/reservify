@@ -6,12 +6,15 @@ import Event.Event;
 import Input.Input;
 import Reservation.Reservation;
 import Reservation.ReservationFactory;
+import Memento.Caretaker;
+import Memento.Originator;
 
 public class MakeReservationCommand implements Command {
 
     private String title;
     private Input input;
     private Event event;
+    private Reservation res;
 
     public MakeReservationCommand(Event event) {
         this.event = event;
@@ -25,15 +28,25 @@ public class MakeReservationCommand implements Command {
         this.event.setEventInfo("In MakeReservationCommand class", "Executing the command to make a reservation", LocalDateTime.now());
         this.event.trigger();
         boolean requestHandled = false;
+        Originator originator = new Originator();
+        Caretaker caretaker = new Caretaker();
         while (!requestHandled) {
             int r1 = input.getInt(rf.getReservationOptions());
-            Reservation res = rf.createReservation(r1);
+            this.res = rf.createReservation(r1);
+            caretaker.addMemento(originator.storeInMemento(res));
+            originator.incrementCurrentReservation();
+            originator.incrementSavedReservations();
             System.out.println("reserved: " + res.getReservationType().toString());
-            ui.requestUserInput(res.getReservationDetails());
+            ui.requestUserInput(res, originator, caretaker);
             requestHandled = true;
         }
 
         return false;
+    }
+
+    public boolean mementoExecute(Originator originator, Caretaker caretaker, UIToolkit ui, Reservation reservation){
+        System.out.println("You shouldn't be using this execute method babes.");
+        return true;
     }
 
     @Override

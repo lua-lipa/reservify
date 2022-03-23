@@ -37,4 +37,8 @@ abstract public class Reservation implements Cloneable {
     public ArrayList<ReservationDetail<?>> getReservationDetails() {
         return ReservationDetails;
     }
+
+    public void setReservationDetails(ArrayList<ReservationDetail<?>> rd) {
+        this.ReservationDetails = rd;
+    }
 }
