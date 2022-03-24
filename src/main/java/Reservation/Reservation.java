@@ -26,7 +26,8 @@ abstract public class Reservation implements Cloneable {
     public void createDetail(String name, String type, Event event) {
         // type must be Integer, String, Double or Date
         ReservationFactory rf = new ReservationFactory(event);
-        ReservationDetail<?> rd = rf.createReservationDetail("name", "Integer");
+        // ReservationDetail<?> rd = rf.createReservationDetail("name", "Integer");
+        ReservationDetail<?> rd = rf.createReservationDetail(name, type);
         ReservationDetails.add(rd);
     }
 
@@ -41,4 +42,9 @@ abstract public class Reservation implements Cloneable {
     public void setReservationDetails(ArrayList<ReservationDetail<?>> rd) {
         this.ReservationDetails = rd;
     }
+
+    public String toString() {
+        return "1";
+    }
+
 }

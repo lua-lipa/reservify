@@ -7,25 +7,33 @@ import Event.*;
 
 public class ReservationFactory {
     private ArrayList<Reservation> prototypes;
+    private ArrayList<Reservation> userReservations;
     public Event event;
 
     public ReservationFactory(Event event) {
         prototypes = new ArrayList<Reservation>();
+        this.userReservations = new ArrayList<Reservation>();
+
         this.event = event;
-        this.event.setEventInfo("In ReservationFactory class", "Creating instance of reservation factory", LocalDateTime.now());
+        this.event.setEventInfo("In ReservationFactory class", "Creating instance of reservation factory",
+                LocalDateTime.now());
         this.event.trigger();
     }
 
     public void registerReservation(Reservation reservation) {
-        this.event.setEventInfo("In ReservationFactory class", "Registering reservation with prototypes array list", LocalDateTime.now());
+        this.event.setEventInfo("In ReservationFactory class", "Registering reservation with prototypes array list",
+                LocalDateTime.now());
         this.event.trigger();
         prototypes.add(reservation);
     }
 
     public Reservation createReservation(int index) {
-        this.event.setEventInfo("In ReservationFactory class", "Creating a reservation using clone", LocalDateTime.now());
+        this.event.setEventInfo("In ReservationFactory class", "Creating a reservation using clone",
+                LocalDateTime.now());
         this.event.trigger();
-        return prototypes.get(index).clone();
+        Reservation reservation = prototypes.get(index).clone();
+        userReservations.add(reservation);
+        return reservation;
     }
 
     public ArrayList<Reservation> getReservations() {
@@ -39,19 +47,23 @@ public class ReservationFactory {
         this.event.trigger();
         ReservationDetail<?> rd = new ReservationDetail<>();
         if (type.equals("Integer")) {
-            this.event.setEventInfo("In ReservationFactory class", "Reservation detail created is of type Integer", LocalDateTime.now());
+            this.event.setEventInfo("In ReservationFactory class", "Reservation detail created is of type Integer",
+                    LocalDateTime.now());
             this.event.trigger();
             rd = new ReservationDetail<Integer>(Integer.class, name, type, event);
         } else if (type.equals("String")) {
-            this.event.setEventInfo("In ReservationFactory class", "Reservation detail created is of type String", LocalDateTime.now());
+            this.event.setEventInfo("In ReservationFactory class", "Reservation detail created is of type String",
+                    LocalDateTime.now());
             this.event.trigger();
             rd = new ReservationDetail<String>(String.class, name, type, event);
         } else if (type.equals("Date")) {
-            this.event.setEventInfo("In ReservationFactory class", "Reservation detail created is of type Date", LocalDateTime.now());
+            this.event.setEventInfo("In ReservationFactory class", "Reservation detail created is of type Date",
+                    LocalDateTime.now());
             this.event.trigger();
             rd = new ReservationDetail<Date>(Date.class, name, type, event);
         } else if (type.equals("Double")) {
-            this.event.setEventInfo("In ReservationFactory class", "Reservation detail created is of type Double", LocalDateTime.now());
+            this.event.setEventInfo("In ReservationFactory class", "Reservation detail created is of type Double",
+                    LocalDateTime.now());
             this.event.trigger();
             rd = new ReservationDetail<Double>(Double.class, name, type, event);
         }
@@ -68,6 +80,16 @@ public class ReservationFactory {
             str += " [" + i + "] " + r.getReservationType().toString();
         }
         return str;
+    }
+
+    public String viewAllReservations() {
+        String allReservations = "";
+        for (int i = 0; i < userReservations.size(); i++) {
+            String reservation = userReservations.get(i).toString();
+            allReservations += reservation;
+            allReservations += "\n";
+        }
+        return allReservations;
     }
 
     // Reservation reservation = new RecurringReservation(new EarlyBooking());

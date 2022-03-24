@@ -29,7 +29,8 @@ public class App2 {
         Event event = new LoggingEvent(co, dispatcher);
         Event welcomeEvent = new WelcomeEvent(co, dispatcher);
 
-        welcomeEvent.setEventInfo("In Main class", "Welcome to Reservify, please create a reservation or amend an existing one.", LocalDateTime.now());
+        welcomeEvent.setEventInfo("In Main class",
+                "Welcome to Reservify, please create a reservation or amend an existing one.", LocalDateTime.now());
         welcomeEvent.trigger();
 
         ReservationFactory rf = new ReservationFactory(event);
@@ -41,13 +42,15 @@ public class App2 {
         Command makeReservationCommand = new MakeReservationCommand(event);
         Command cancelReservationCommand = new CancelReservationCommand(event);
         Command changeReservationCommand = new ChangeReservationCommand(event);
+        Command viewReservationsCommand = new ViewReservationsCommand(event);
         Command exitSystemCommand = new ExitSystemCommand(event);
         Command undoReservationDetailCommand = new UndoReservationDetail(event);
 
         ui.setCommand(1, makeReservationCommand);
         ui.setCommand(2, cancelReservationCommand);
         ui.setCommand(3, changeReservationCommand);
-        ui.setCommand(4, exitSystemCommand);
+        ui.setCommand(4, viewReservationsCommand);
+        ui.setCommand(5, exitSystemCommand);
         ui.setMementoCommand(undoReservationDetailCommand);
         ui.registerReservationFactory(rf);
 
