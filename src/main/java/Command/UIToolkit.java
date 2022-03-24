@@ -31,6 +31,23 @@ public class UIToolkit {
         previousCommand = new NoCommand(event);
         mementoCommand = new NoCommand(event);
         this.setCommand(UNDO_INDEX, previousCommand);
+        this.rf = new ReservationFactory(event);
+
+        Command makeReservationCommand = new MakeReservationCommand(event);
+        Command cancelReservationCommand = new CancelReservationCommand(event);
+        Command changeReservationCommand = new ChangeReservationCommand(event);
+        Command exitSystemCommand = new ExitSystemCommand(event);
+        Command undoReservationDetailCommand = new UndoReservationDetail(event);
+
+        this.setCommand(1, makeReservationCommand);
+        this.setCommand(2, cancelReservationCommand);
+        this.setCommand(3, changeReservationCommand);
+        this.setCommand(4, exitSystemCommand);
+        this.setMementoCommand(undoReservationDetailCommand);
+    }
+
+    public void registerReservation(Reservation r) {
+        rf.registerReservation(r);
     }
 
     public void setCommand(int commandIndex, Command command) {
@@ -151,10 +168,6 @@ public class UIToolkit {
         }
     }
 
-    public void registerReservationFactory(ReservationFactory rf) {
-        this.event.setEventInfo("In UIToolkit class", "Registering the reservation factory object", LocalDateTime.now());
-        this.event.trigger();
-        this.rf = rf;
-    }
+    
 
 }
