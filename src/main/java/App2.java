@@ -8,7 +8,7 @@ import Command.*;
 import Input.Input;
 import Reservation.BookReservation;
 import Reservation.LaptopReservation;
-import Reservation.Reservation;
+import Reservation.StandardReservation;
 import Reservation.ReservationDetail;
 import Reservation.ReservationFactory;
 import Reservation.RoomReservation;
@@ -49,7 +49,6 @@ public class App2 {
         ui.setCommand(3, changeReservationCommand);
         ui.setCommand(4, exitSystemCommand);
         ui.setMementoCommand(undoReservationDetailCommand);
-        ui.registerReservationFactory(rf);
 
         boolean sessionExited = false;
         Input input = Input.getInstance();
