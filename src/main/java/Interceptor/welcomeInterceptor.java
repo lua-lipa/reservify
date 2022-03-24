@@ -1,6 +1,6 @@
 package Interceptor;
 
-public class welcomeInterceptor implements interceptor{
+public class welcomeInterceptor implements interceptor {
     contextObject co;
     String triggerEvent;
     interceptor nextInChain;
@@ -22,7 +22,7 @@ public class welcomeInterceptor implements interceptor{
             System.out.println("*******************************************************");
             System.out.println();
         } else {
-            if(nextInChain == null){
+            if (nextInChain == null) {
                 System.out.println("No more interceptors in chain, stopped at welcome interceptor.");
             } else {
                 this.nextInChain.execute(request);
@@ -36,6 +36,11 @@ public class welcomeInterceptor implements interceptor{
 
     public void setNextChain(interceptor nextInChain) {
         this.nextInChain = nextInChain;
+    }
+
+    @Override
+    public interceptor getNextInChain() {
+        return this.nextInChain;
     }
 
 }

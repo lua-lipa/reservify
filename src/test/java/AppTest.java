@@ -21,7 +21,7 @@ public class AppTest {
     @Test
     public void testMakeReservationCommand() {
         String expected_title = "Make Reservation";
-        Command makeReservation = new MakeReservationCommand();
+        Command makeReservation = new MakeReservationCommand(null);
         String actual_title = makeReservation.getCommandTitle();
         assertEquals(expected_title, actual_title);
     }
@@ -29,7 +29,7 @@ public class AppTest {
     @Test
     public void testExitReservationCommand() {
         String expected_title = "Exit System";
-        Command exitSystem = new ExitSystemCommand();
+        Command exitSystem = new ExitSystemCommand(null);
         String actual_title = exitSystem.getCommandTitle();
         assertEquals(expected_title, actual_title);
     }

@@ -44,7 +44,8 @@ public class UIToolkit {
     }
 
     public void setCommands(HashMap<Integer, Command> commands) {
-        this.event.setEventInfo("In UIToolkit class", "Setting the commands hashmap to new hashmap", LocalDateTime.now());
+        this.event.setEventInfo("In UIToolkit class", "Setting the commands hashmap to new hashmap",
+                LocalDateTime.now());
         this.event.trigger();
         this.commands = commands;
     }
@@ -56,7 +57,8 @@ public class UIToolkit {
     }
 
     public boolean executeCommand(int commandIndex) {
-        this.event.setEventInfo("In UIToolkit class", "Executing the command at command index passed in as parameter", LocalDateTime.now());
+        this.event.setEventInfo("In UIToolkit class", "Executing the command at command index passed in as parameter",
+                LocalDateTime.now());
         this.event.trigger();
         boolean systemExited = false;
 
@@ -125,21 +127,21 @@ public class UIToolkit {
                 String res = input.getDate("Enter " + r.getName());
                 originator.set(res);
             }
-            
+
             caretaker.addMemento(originator.storeInMemento(reservation));
             originator.incrementCurrentReservation();
             originator.incrementSavedReservations();
 
-            while(wait){
+            while (wait) {
                 int command_index = input.getInt(getMementoCommandOptions());
                 boolean sessionExited = true;
-                if(command_index == 0){
+                if (command_index == 0) {
                     i--;
                     sessionExited = executeMementoCommand();
                 } else {
                     wait = false;
                 }
-                if(sessionExited){
+                if (sessionExited) {
                     System.out.println("Reservation Details: ");
                     for (int j = 0; j < rd.size(); j++) {
                         ReservationDetail<?> reservationDetail = rd.get(j);
@@ -152,9 +154,14 @@ public class UIToolkit {
     }
 
     public void registerReservationFactory(ReservationFactory rf) {
-        this.event.setEventInfo("In UIToolkit class", "Registering the reservation factory object", LocalDateTime.now());
+        this.event.setEventInfo("In UIToolkit class", "Registering the reservation factory object",
+                LocalDateTime.now());
         this.event.trigger();
         this.rf = rf;
+    }
+
+    public Command getCommand(int index) {
+        return commands.get(index);
     }
 
 }

@@ -8,4 +8,6 @@ public interface interceptor {
     public String getTriggerEvent();
 
     public void setNextChain(interceptor nextInChain);
+
+    public interceptor getNextInChain();
 }
