@@ -10,6 +10,8 @@ import Input.Input;
 public class StandardReservation extends Reservation {
     private String reservationName;
     private Double reservationPrice;
+    private ReservationType_ENUM reservationType = ReservationType_ENUM.STANDARD_RESERVATION;
+
     private Event event;
 
     public StandardReservation(Event event, String name, Double Price) {
@@ -32,10 +34,8 @@ public class StandardReservation extends Reservation {
     }
 
     public void setReservationPrice(Double reservationPrice) {
-       this.reservationPrice = reservationPrice;
+        this.reservationPrice = reservationPrice;
     }
-
-
 
     @Override
     void reserve() {
@@ -45,6 +45,6 @@ public class StandardReservation extends Reservation {
 
     @Override
     public String getReservationType() {
-        return reservationType;
+        return reservationType.label;
     }
 }
