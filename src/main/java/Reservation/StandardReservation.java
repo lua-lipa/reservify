@@ -40,7 +40,6 @@ public class StandardReservation extends Reservation {
     @Override
     void reserve() {
         // TODO Auto-generated method stub
-
     }
 
     @Override
