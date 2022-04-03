@@ -1,7 +1,7 @@
 package Booking;
 
 import java.util.Date;
- 
+
 /*
     Booking.java acts as the Implementation for the Reservation abstraction
     Bridge Design Pattern: Separation of Abstraction(Reservation) from Implementation(Booking)

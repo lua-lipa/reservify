@@ -1,11 +1,7 @@
 package Input;
 
-import java.util.Date;
 import java.util.Scanner;
 import java.util.regex.Pattern;
-
-import Event.Event;
-import Reservation.ReservationDetail;
 
 public class Input {
     private static Input instance = new Input();
