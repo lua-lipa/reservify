@@ -36,7 +36,7 @@ public class MakeReservationCommand implements Command {
             caretaker.addMemento(originator.storeInMemento(res));
             originator.incrementCurrentReservation();
             originator.incrementSavedReservations();
-            System.out.println("reserved: " + res.getReservationType().toString());
+            System.out.println("reserved: " + res.getReservationName().toString());
             ui.requestUserInput(res, originator, caretaker);
             requestHandled = true;
         }

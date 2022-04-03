@@ -65,7 +65,7 @@ public class ReservationFactory {
         String str = "Reservation Types";
         for (int i = 0; i < prototypes.size(); i++) {
             Reservation r = prototypes.get(i);
-            str += " [" + i + "] " + r.getReservationType().toString();
+            str += " [" + i + "] " + r.getReservationName().toString();
         }
         return str;
     }

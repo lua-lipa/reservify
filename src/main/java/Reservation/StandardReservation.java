@@ -18,7 +18,7 @@ public class StandardReservation extends Reservation {
         this.event = event;
         this.event.setEventInfo("In BookReservation class", "Creating a book reservation object", LocalDateTime.now());
         this.event.trigger();
-        this.createDetail("hi", "pls", event);
+        this.reservationName = name;
     }
 
     public String getReservationName() {

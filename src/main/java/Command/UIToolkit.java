@@ -23,7 +23,7 @@ public class UIToolkit {
     private Originator originator;
     private Caretaker caretaker;
 
-    public UIToolkit(Event event) {
+    public UIToolkit(Event event, ReservationFactory rf) {
         this.event = event;
         this.event.setEventInfo("In UIToolkit class", "Creating a UI toolkit object", LocalDateTime.now());
         this.event.trigger();
@@ -31,7 +31,7 @@ public class UIToolkit {
         previousCommand = new NoCommand(event);
         mementoCommand = new NoCommand(event);
         this.setCommand(UNDO_INDEX, previousCommand);
-        this.rf = new ReservationFactory(event);
+        this.rf = rf;
 
         Command makeReservationCommand = new MakeReservationCommand(event);
         Command cancelReservationCommand = new CancelReservationCommand(event);
@@ -128,7 +128,7 @@ public class UIToolkit {
             ReservationDetail<?> r = rd.get(i);
             String type = r.getType();
             originator.setReservationDetail(r);
-
+            System.out.println(r.getName() + " die bro");
             if (type.equals("Integer")) {
                 int res = input.getInt("Enter " + r.getName());
                 originator.set(res);

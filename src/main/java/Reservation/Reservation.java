@@ -23,10 +23,21 @@ abstract public class Reservation implements Cloneable {
 
     public abstract String getReservationType();
 
+    public abstract String getReservationName();
+
     public void createDetail(String name, String type, Event event) {
         // type must be Integer, String, Double or Date
-        ReservationFactory rf = new ReservationFactory(event);
-        ReservationDetail<?> rd = rf.createReservationDetail("name", "Integer");
+        ReservationDetail<?> rd = new ReservationDetail<>();
+        if (type.equals("Integer")) {
+            rd = new ReservationDetail<Integer>(Integer.class, name, type, event);
+        } else if (type.equals("String")) {
+            rd = new ReservationDetail<String>(String.class, name, type, event);
+        } else if (type.equals("Date")) {
+            rd = new ReservationDetail<Date>(Date.class, name, type, event);
+        } else if (type.equals("Double")) {
+            rd = new ReservationDetail<Double>(Double.class, name, type, event);
+        }
+
         ReservationDetails.add(rd);
     }
 

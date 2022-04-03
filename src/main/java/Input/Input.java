@@ -47,7 +47,7 @@ public class Input {
             System.out.println(sPrompt);
             scanner.nextLine();
         }
-        return scanner.nextLine();
+        return scanner.next();
     }
 
     public String getDate(String sPrompt) {

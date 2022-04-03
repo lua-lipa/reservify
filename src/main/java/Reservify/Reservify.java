@@ -13,11 +13,13 @@ import Interceptor.interceptor;
 import Interceptor.loggingInterceptor;
 import Interceptor.welcomeInterceptor;
 import Reservation.Reservation;
+import Reservation.ReservationFactory;
 import Reservation.StandardReservation;
 
 public class Reservify {
     private static Reservify instance = null;
     private static UIToolkit uiInstance = null;
+    private ReservationFactory reservationFactory;
     private Event loggingEvent = null;
     
     private Reservify() {}
@@ -26,6 +28,7 @@ public class Reservify {
         if (instance == null) {
             instance = new Reservify();
             instance.initInterceptor();
+            instance.reservationFactory = new ReservationFactory(instance.loggingEvent);
         }
         
         return instance;
@@ -33,7 +36,7 @@ public class Reservify {
 
     public UIToolkit getUIToolkit() {
         if (uiInstance == null) {
-            uiInstance = new UIToolkit(loggingEvent);
+            uiInstance = new UIToolkit(loggingEvent, reservationFactory);
         }
         
         return uiInstance;
@@ -45,7 +48,7 @@ public class Reservify {
 
     public Reservation createReservation(String name, Double price) {
         Reservation reservation = new StandardReservation(loggingEvent, name, price);
-        reservation.clone();
+        reservationFactory.registerReservation(reservation);
 
         return reservation;
     }
