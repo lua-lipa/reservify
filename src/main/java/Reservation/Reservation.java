@@ -1,12 +1,16 @@
 package Reservation;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
+import Booking.Booking;
 import Event.Event;
 import Input.Input;
+import Event.Event;
 
 abstract public class Reservation implements Cloneable {
+
     private ArrayList<ReservationDetail<?>> ReservationDetails = new ArrayList<ReservationDetail<?>>();
 
     public Reservation clone() {
@@ -19,7 +23,7 @@ abstract public class Reservation implements Cloneable {
         return reservation;
     }
 
-    abstract void reserve();
+    public abstract void reserve();
 
     public abstract String getReservationType();
 

@@ -1,20 +1,20 @@
 package Reservation;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
 
+import Booking.Booking;
 import Event.Event;
-import Input.Input;
 
 public class StandardReservation extends Reservation {
     private String reservationName;
     private Double reservationPrice;
     private ReservationType_ENUM reservationType = ReservationType_ENUM.STANDARD_RESERVATION;
+    private Booking booking;
 
     private Event event;
 
-    public StandardReservation(Event event, String name, Double Price) {
+    public StandardReservation(Booking booking, Event event, String name, Double Price) {
+        this.booking = booking;
         this.event = event;
         this.event.setEventInfo("In BookReservation class", "Creating a book reservation object", LocalDateTime.now());
         this.event.trigger();
@@ -38,9 +38,8 @@ public class StandardReservation extends Reservation {
     }
 
     @Override
-    void reserve() {
-        // TODO Auto-generated method stub
-
+    public void reserve() {
+        booking.createBooking();
     }
 
     @Override

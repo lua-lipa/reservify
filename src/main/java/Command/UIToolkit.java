@@ -157,6 +157,7 @@ public class UIToolkit {
                     wait = false;
                 }
                 if(sessionExited){
+                    reservation.reserve();
                     System.out.println("Reservation Details: ");
                     for (int j = 0; j < rd.size(); j++) {
                         ReservationDetail<?> reservationDetail = rd.get(j);
