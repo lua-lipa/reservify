@@ -2,6 +2,7 @@ package Reservify;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import Booking.Booking;
 import Command.UIToolkit;
 import Event.Event;
 import Event.LoggingEvent;
@@ -46,8 +47,8 @@ public class Reservify {
         return Input.getInstance();
     }
 
-    public Reservation createReservation(String name, Double price) {
-        Reservation reservation = new StandardReservation(loggingEvent, name, price);
+    public Reservation createReservation(Booking booking, String name, Double price) {
+        Reservation reservation = new StandardReservation(booking, loggingEvent, name, price);
         reservationFactory.registerReservation(reservation);
 
         return reservation;

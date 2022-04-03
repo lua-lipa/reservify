@@ -1,3 +1,4 @@
+import Booking.EarlyBooking;
 import Command.UIToolkit;
 import Input.Input;
 import Reservation.Reservation;
@@ -9,7 +10,7 @@ public class App3 {
         UIToolkit ui = reservify.getUIToolkit();
         Input input = reservify.getInput();
 
-        Reservation reservation = reservify.createReservation("Gym Class", 0.0);
+        Reservation reservation = reservify.createReservation(new EarlyBooking(), "Gym Class", 0.0);
         reservation.createDetail("First Name", "String", reservify.getLoggingEvent());
         reservation.createDetail("Last Name", "String", reservify.getLoggingEvent());
 
