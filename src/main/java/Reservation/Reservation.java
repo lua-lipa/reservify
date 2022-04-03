@@ -1,12 +1,32 @@
 package Reservation;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
+import Booking.Booking;
 import Event.Event;
 import Input.Input;
+import Event.Event;
 
 abstract public class Reservation implements Cloneable {
+    private Booking booking;
+    private String reservationName;
+    private Double reservationPrice;
+    private ReservationType_ENUM reservationType = ReservationType_ENUM.STANDARD_RESERVATION;
+    private Event event;
+
+    Reservation(Booking booking) {
+        this.booking = booking;
+    }
+
+    public Reservation(Event event, String name, Double Price) {
+        this.event = event;
+        this.event.setEventInfo("In Reservation class", "Passing through Reservation to booking event", LocalDateTime.now());
+        this.event.trigger();
+        this.createDetail("pls", "work", event);
+    }
+
     private ArrayList<ReservationDetail<?>> ReservationDetails = new ArrayList<ReservationDetail<?>>();
 
     public Reservation clone() {

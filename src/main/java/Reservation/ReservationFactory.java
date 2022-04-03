@@ -2,6 +2,9 @@ package Reservation;
 
 import java.util.ArrayList;
 import java.util.Date;
+
+import Booking.Booking;
+
 import java.time.LocalDateTime;
 import Event.*;
 
@@ -32,6 +35,11 @@ public class ReservationFactory {
         this.event.setEventInfo("In ReservationFactory class", "Getting list of reservations", LocalDateTime.now());
         this.event.trigger();
         return prototypes;
+    }
+
+    public void createBooking(Booking booking){
+        this.event.setEventInfo("In X class", "Creating the Booking", LocalDateTime.now());
+        this.event.trigger();
     }
 
     public ReservationDetail<?> createReservationDetail(String name, String type) {

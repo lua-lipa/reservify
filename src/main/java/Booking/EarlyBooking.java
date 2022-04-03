@@ -12,7 +12,7 @@ public class EarlyBooking implements Booking {
     // this.date = date;
     // this.referenceNumber = referenceNumber;
     // }
-
+ 
     public boolean createBooking() {
         System.out.println("Early Booking Done");
 
