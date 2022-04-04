@@ -32,7 +32,6 @@ public class UndoReservationDetail implements Command{
             int ind = originator.getCurrentReservationIndex();
             ArrayList<ReservationDetail<?>> res = originator.restoreFromMemento(caretaker.getMemento(ind));
             reservation.setReservationDetails(res);
-            //call something to print out the details
         } else {
             System.out.println("You must make a reservation first.");
         }

@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import Event.Event;
+import Memento.Memento;
 
-abstract public class Reservation implements Cloneable {
+abstract public class Reservation implements Cloneable, Memento {
 
     private ArrayList<ReservationDetail<?>> ReservationDetails = new ArrayList<ReservationDetail<?>>();
 
