@@ -23,7 +23,7 @@ public class UIToolkit {
     private Originator originator;
     private Caretaker caretaker;
 
-    public UIToolkit(Event event, ReservationFactory rf) {
+    public UIToolkit(Event event, Event goodbyeEvent, ReservationFactory rf) {
         this.event = event;
         this.event.setEventInfo("In UIToolkit class", "Creating a UI toolkit object", LocalDateTime.now());
         this.event.trigger();
@@ -36,7 +36,7 @@ public class UIToolkit {
         Command makeReservationCommand = new MakeReservationCommand(event);
         Command cancelReservationCommand = new CancelReservationCommand(event);
         Command changeReservationCommand = new ChangeReservationCommand(event);
-        Command exitSystemCommand = new ExitSystemCommand(event);
+        Command exitSystemCommand = new ExitSystemCommand(goodbyeEvent);
         Command undoReservationDetailCommand = new UndoReservationDetail(event);
 
         this.setCommand(1, makeReservationCommand);

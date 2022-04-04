@@ -14,13 +14,11 @@ public class ExitSystemCommand implements Command {
 
     public ExitSystemCommand(Event event) {
         this.event = event;
-        this.event.setEventInfo("In ExitSystemCommand class", "Creating Exit System Command object", LocalDateTime.now());
-        this.event.trigger();
         this.title = "Exit System";
     }
 
     public boolean execute(ReservationFactory rf, UIToolkit ui) {
-        this.event.setEventInfo("In ExitSystemCommand class", "Executing the command and exiting system", LocalDateTime.now());
+        this.event.setEventInfo("In ExitSystemCommand class", "Thank you for using Reservify, til next time goodbye.", LocalDateTime.now());
         this.event.trigger();
         return true;
     }
