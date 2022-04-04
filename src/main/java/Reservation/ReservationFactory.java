@@ -6,9 +6,10 @@ import java.util.Date;
 import Booking.Booking;
 
 import java.time.LocalDateTime;
+import Visitor.*;
 import Event.*;
 
-public class ReservationFactory {
+public class ReservationFactory implements Visitable{
     private ArrayList<Reservation> prototypes;
     public Event event;
 
@@ -78,5 +79,8 @@ public class ReservationFactory {
         return str;
     }
 
-    // Reservation reservation = new RecurringReservation(new EarlyBooking());
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
 }

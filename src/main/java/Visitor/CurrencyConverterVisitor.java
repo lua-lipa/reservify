@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import Reservation.Reservation;
+import Reservation.ReservationFactory;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,40 +18,11 @@ import org.json.JSONObject;
 /** CONVERTING FROM EURO ALWAYS */
 public class CurrencyConverterVisitor implements Visitor {
 
-    /** Uncomment this block to test and comment the Reservation visit */
-    // public static void main(String[] args) throws JSONException {
-    // HashMap<Integer, String> currencyCode = new HashMap<Integer, String>();
-    // String fromCode = "EUR";
-    // String toCode;
-    // double amount = 50.0;
+    public CurrencyConverterVisitor() {
 
-    // int to;
-    // currencyCode.put(1, "USD");
-    // currencyCode.put(2, "GBP");
-    // fromCode = "EUR";
+    }
 
-    // Scanner sc = new Scanner(System.in);
-
-    // System.out.println("Enter the currency code \n1.USD\n2:GBP");
-    // to = sc.nextInt();
-
-    // while (to < 1 || to > 2) {
-    // System.out.println("Enter a valid currency code \n1.USB\n2:GBP");
-    // to = sc.nextInt();
-    // }
-
-    // toCode = currencyCode.get(to);
-
-    // try {
-    // sendHttpRequest(toCode, fromCode, amount);
-    // } catch (IOException e) {
-    // e.printStackTrace();
-    // }
-
-    // sc.close();
-    // }
-
-    public void visit(Reservation reservation) {
+    public void visit(ReservationFactory reservationFactory) {
         HashMap<Integer, String> currencyCode = new HashMap<Integer, String>();
         String fromCode = "EUR";
         String toCode;
@@ -114,9 +86,6 @@ public class CurrencyConverterVisitor implements Visitor {
 
             Double exchangeRate = jsonObj.getDouble(fullCode);
             System.out.println(f.format(exchangeRate * amount));
-
-            // System.out.println(f.format(amount) + fromCode + " = " + f.format(amount /
-            // exchangeRate) + toCode);
         } else {
             System.out.println("GET request failed");
         }
