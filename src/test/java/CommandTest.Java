@@ -5,10 +5,12 @@ import org.junit.Test;
 import Command.Command;
 import Command.ExitSystemCommand;
 import Command.MakeReservationCommand;
+import Command.UIToolkit;
 import Interceptor.contextObject;
 import Interceptor.dispatcher;
 import Interceptor.interceptor;
 import Interceptor.loggingInterceptor;
+import Reservation.ReservationFactory;
 import Event.Event;
 import Event.LoggingEvent;
 
@@ -33,7 +35,7 @@ public class CommandTest {
     }
 
     @Test
-    void testExitCommandExecute() {
+    public void testExitCommandExecute() {
         Event event = setUpMockEvent();
         Command exitSystemCommand = new ExitSystemCommand(event);
         Boolean result = exitSystemCommand.execute(null, null);
@@ -41,10 +43,12 @@ public class CommandTest {
     }
 
     @Test
-    void testMakeReservation() {
+    public void testMakeReservation() {
         Event event = setUpMockEvent();
         Command makeReservationCommand = new MakeReservationCommand(event);
-        Boolean result = makeReservationCommand.execute(null, null);
+        ReservationFactory rf = new ReservationFactory(event);
+        UIToolkit ui = new UIToolkit(event, event, rf);
+        Boolean result = makeReservationCommand.execute(rf, ui);
         assertEquals(result, false);
     }
 
