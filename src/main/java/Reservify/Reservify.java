@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import Booking.Booking;
 import Command.UIToolkit;
 import Event.Event;
+import Event.GoodbyeEvent;
 import Event.LoggingEvent;
 import Event.WelcomeEvent;
 import Input.Input;
 import Interceptor.contextObject;
 import Interceptor.dispatcher;
+import Interceptor.goodbyeInterceptor;
 import Interceptor.interceptor;
 import Interceptor.loggingInterceptor;
 import Interceptor.welcomeInterceptor;
@@ -22,7 +24,8 @@ public class Reservify {
     private static UIToolkit uiInstance = null;
     private ReservationFactory reservationFactory;
     private Event loggingEvent = null;
-    
+    private Event goodbyeEvent = null;
+
     private Reservify() {}
 
     public static Reservify getInstance() {
@@ -37,7 +40,7 @@ public class Reservify {
 
     public UIToolkit getUIToolkit() {
         if (uiInstance == null) {
-            uiInstance = new UIToolkit(loggingEvent, reservationFactory);
+            uiInstance = new UIToolkit(loggingEvent, goodbyeEvent, reservationFactory);
         }
         
         return uiInstance;
@@ -61,13 +64,17 @@ public class Reservify {
     private void initInterceptor() {
         interceptor logging = new loggingInterceptor("log");
         interceptor welcome = new welcomeInterceptor("welcome");
+        interceptor goodbye = new goodbyeInterceptor("goodbye");
+
         contextObject co = new contextObject();
         dispatcher dispatcher = new dispatcher(co);
         dispatcher.register(logging);
         dispatcher.register(welcome);
+        dispatcher.register(goodbye);
 
         this.loggingEvent = new LoggingEvent(co, dispatcher);
         Event welcomeEvent = new WelcomeEvent(co, dispatcher);
+        this.goodbyeEvent = new GoodbyeEvent(co, dispatcher);
 
         welcomeEvent.setEventInfo("In Main class", "Welcome to Reservify, please create a reservation or amend an existing one.", LocalDateTime.now());
         welcomeEvent.trigger();
