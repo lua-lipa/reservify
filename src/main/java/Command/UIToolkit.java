@@ -143,9 +143,7 @@ public class UIToolkit {
             }
             
             caretaker.addMemento(originator.storeInMemento(reservation));
-            originator.incrementCurrentReservation();
-            originator.incrementSavedReservations();
-
+            
             while(wait){
                 int command_index = input.getInt(getMementoCommandOptions());
                 boolean sessionExited = true;
