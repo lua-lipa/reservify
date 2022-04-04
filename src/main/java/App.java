@@ -19,12 +19,12 @@ public class App {
     }
 
     private static UIToolkit setUpUI() {
-        UIToolkit uiToolKit = new UIToolkit();
+        UIToolkit uiToolKit = new UIToolkit(null, null, null);
 
-        Command makeReservationCommand = new MakeReservationCommand();
-        Command cancelReservationCommand = new CancelReservationCommand();
-        Command changeReservationCommand = new ChangeReservationCommand();
-        Command exitSystemCommand = new ExitSystemCommand();
+        Command makeReservationCommand = new MakeReservationCommand(null);
+        Command cancelReservationCommand = new CancelReservationCommand(null);
+        Command changeReservationCommand = new ChangeReservationCommand(null);
+        Command exitSystemCommand = new ExitSystemCommand(null);
 
         uiToolKit.setCommand(1, makeReservationCommand);
         uiToolKit.setCommand(2, cancelReservationCommand);
