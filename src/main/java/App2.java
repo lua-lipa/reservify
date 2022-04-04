@@ -29,15 +29,16 @@ public class App2 {
         Event event = new LoggingEvent(co, dispatcher);
         Event welcomeEvent = new WelcomeEvent(co, dispatcher);
 
-        welcomeEvent.setEventInfo("In Main class", "Welcome to Reservify, please create a reservation or amend an existing one.", LocalDateTime.now());
+        welcomeEvent.setEventInfo("In Main class",
+                "Welcome to Reservify, please create a reservation or amend an existing one.", LocalDateTime.now());
         welcomeEvent.trigger();
 
         ReservationFactory rf = new ReservationFactory(event);
-        rf.registerReservation(new BookReservation(event));
-        rf.registerReservation(new LaptopReservation(event));
-        rf.registerReservation(new RoomReservation(event));
+        // rf.registerReservation(new BookReservation(event));
+        // rf.registerReservation(new LaptopReservation(event));
+        // rf.registerReservation(new RoomReservation(event));
 
-        UIToolkit ui = new UIToolkit(event);
+        UIToolkit ui = new UIToolkit(event, welcomeEvent, rf);
         Command makeReservationCommand = new MakeReservationCommand(event);
         Command cancelReservationCommand = new CancelReservationCommand(event);
         Command changeReservationCommand = new ChangeReservationCommand(event);
