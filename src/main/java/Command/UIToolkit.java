@@ -24,14 +24,23 @@ public class UIToolkit {
     private Caretaker caretaker;
 
     public UIToolkit(Event event, Event goodbyeEvent, ReservationFactory rf) {
+        // set up the event for the interceptor
         this.event = event;
         this.event.setEventInfo("In UIToolkit class", "Creating a UI toolkit object", LocalDateTime.now());
         this.event.trigger();
+
+        // add all commands to the commands hashmap
+        setUpAllCommands(event, goodbyeEvent);
+
+        // set up the reservation factory
+        this.rf = rf;
+
+    }
+
+    public void setUpAllCommands(Event event, Event goodbyeEvent) {
         commands = new HashMap<>();
         previousCommand = new NoCommand(event);
         mementoCommand = new NoCommand(event);
-        this.setCommand(UNDO_INDEX, previousCommand);
-        this.rf = rf;
 
         Command makeReservationCommand = new MakeReservationCommand(event);
         Command cancelReservationCommand = new CancelReservationCommand(event);
@@ -39,6 +48,7 @@ public class UIToolkit {
         Command exitSystemCommand = new ExitSystemCommand(goodbyeEvent);
         Command undoReservationDetailCommand = new UndoReservationDetail(event);
 
+        this.setCommand(UNDO_INDEX, previousCommand);
         this.setCommand(1, makeReservationCommand);
         this.setCommand(2, cancelReservationCommand);
         this.setCommand(3, changeReservationCommand);
@@ -61,7 +71,8 @@ public class UIToolkit {
     }
 
     public void setCommands(HashMap<Integer, Command> commands) {
-        this.event.setEventInfo("In UIToolkit class", "Setting the commands hashmap to new hashmap", LocalDateTime.now());
+        this.event.setEventInfo("In UIToolkit class", "Setting the commands hashmap to new hashmap",
+                LocalDateTime.now());
         this.event.trigger();
         this.commands = commands;
     }
@@ -73,19 +84,25 @@ public class UIToolkit {
     }
 
     public boolean executeCommand(int commandIndex) {
-        this.event.setEventInfo("In UIToolkit class", "Executing the command at command index passed in as parameter", LocalDateTime.now());
+        // logging
+        this.event.setEventInfo("In UIToolkit class", "Executing the command at command index passed in as parameter",
+                LocalDateTime.now());
         this.event.trigger();
-        boolean systemExited = false;
 
+        boolean requestHandled = false;
+
+        // get current command at the inputted slot
         Command command = commands.get(commandIndex);
         if (undoButtonPressed(commandIndex)) {
+            // undo the previous command if the undo button was pressed
             previousCommand.undo();
         } else {
+            // execute the current command if .execute() was requested
             previousCommand = command;
-            systemExited = command.execute(rf, this);
+            requestHandled = command.execute(rf, this);
         }
 
-        return systemExited;
+        return requestHandled;
     }
 
     public boolean executeMementoCommand() {
@@ -141,19 +158,19 @@ public class UIToolkit {
                 String res = input.getDate("Enter " + r.getName());
                 originator.set(res);
             }
-            
+
             caretaker.addMemento(originator.storeInMemento(reservation));
-            
-            while(wait){
+
+            while (wait) {
                 int command_index = input.getInt(getMementoCommandOptions());
                 boolean sessionExited = true;
-                if(command_index == 0){
+                if (command_index == 0) {
                     i--;
                     sessionExited = executeMementoCommand();
                 } else {
                     wait = false;
                 }
-                if(sessionExited){
+                if (sessionExited) {
                     reservation.reserve();
                     System.out.println("Reservation Details: ");
                     for (int j = 0; j < rd.size(); j++) {
@@ -165,7 +182,5 @@ public class UIToolkit {
             }
         }
     }
-
-    
 
 }
