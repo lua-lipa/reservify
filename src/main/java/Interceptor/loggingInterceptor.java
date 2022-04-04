@@ -23,7 +23,7 @@ public class loggingInterceptor implements interceptor {
             System.out.println("*******************************************************");
             System.out.println();
         } else {
-            if(this.nextInChain == null){
+            if (this.nextInChain == null) {
                 System.out.println("No more interceptors in chain, stopped at logging interceptor.");
             } else {
                 this.nextInChain.execute(request);
@@ -37,6 +37,10 @@ public class loggingInterceptor implements interceptor {
 
     public void setNextChain(interceptor nextInChain) {
         this.nextInChain = nextInChain;
+    }
+
+    public interceptor getNextInChain() {
+        return this.nextInChain;
     }
 
 }
