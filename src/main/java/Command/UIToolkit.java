@@ -128,7 +128,6 @@ public class UIToolkit {
             ReservationDetail<?> r = rd.get(i);
             String type = r.getType();
             originator.setReservationDetail(r);
-            System.out.println(r.getName() + " die bro");
             if (type.equals("Integer")) {
                 int res = input.getInt("Enter " + r.getName());
                 originator.set(res);
