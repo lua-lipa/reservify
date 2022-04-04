@@ -1,37 +1,16 @@
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Date;
-
 import org.junit.Test;
 
 import Booking.Booking;
 import Booking.EarlyBooking;
-import Command.Command;
-import Command.ExitSystemCommand;
-import Command.MakeReservationCommand;
 
 public class AppTest {
     @Test
     public void test() {
         assertEquals(2, 1 + 1);
         ;
-    }
-
-    @Test
-    public void testMakeReservationCommand() {
-        String expected_title = "Make Reservation";
-        Command makeReservation = new MakeReservationCommand();
-        String actual_title = makeReservation.getCommandTitle();
-        assertEquals(expected_title, actual_title);
-    }
-
-    @Test
-    public void testExitReservationCommand() {
-        String expected_title = "Exit System";
-        Command exitSystem = new ExitSystemCommand();
-        String actual_title = exitSystem.getCommandTitle();
-        assertEquals(expected_title, actual_title);
     }
 
     @Test
