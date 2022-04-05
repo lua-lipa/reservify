@@ -15,8 +15,6 @@ public class ReservationFactory {
     public ReservationFactory(Event event) {
         prototypes = new ArrayList<Reservation>();
         this.event = event;
-        this.event.setEventInfo("In ReservationFactory class", "Creating instance of reservation factory", LocalDateTime.now());
-        this.event.trigger();
     }
 
     public void registerReservation(Reservation reservation) {

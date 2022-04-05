@@ -1,12 +1,22 @@
 import Booking.EarlyBooking;
 import Command.UIToolkit;
 import Input.Input;
+import Interceptor.goodbyeInterceptor;
+import Interceptor.interceptor;
+import Interceptor.loggingInterceptor;
+import Interceptor.welcomeInterceptor;
 import Reservation.Reservation;
 import Reservify.Reservify;
 
 public class App3 {
     public static void main(String[] args) throws Exception {
         Reservify reservify = Reservify.getInstance();
+        interceptor logging = new loggingInterceptor("log");
+        reservify.initInterceptor(logging);
+        interceptor welcome = new welcomeInterceptor("welcome");
+        reservify.initInterceptor(welcome);
+        interceptor goodbye = new goodbyeInterceptor("goodbye");
+        reservify.initInterceptor(goodbye);
         UIToolkit ui = reservify.getUIToolkit();
         Input input = reservify.getInput();
 
