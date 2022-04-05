@@ -19,11 +19,6 @@ public class UndoReservationDetail implements Command{
         this.event.trigger();
     }
 
-    public boolean execute(ReservationFactory rf, UIToolkit ui){
-        System.out.println("You shouldn't be using this execute method babes.");
-        return true;
-    }
-
     public boolean mementoExecute(Originator originator, Caretaker caretaker, UIToolkit ui, Reservation reservation){
         this.event.setEventInfo("In UndoReservationDetail class", "Executing undo reservation detail, allowing the user to input the detail again.", LocalDateTime.now());
         this.event.trigger();
@@ -36,6 +31,11 @@ public class UndoReservationDetail implements Command{
         return true;
     }
 
+    public boolean execute(ReservationFactory rf, UIToolkit ui){
+        System.out.println("You shouldn't be using this execute method babes.");
+        return true;
+    }
+    
     public void undo(){}
 
     public String getCommandTitle(){return "Undo Reservation Detail";}

@@ -2,6 +2,7 @@
 import java.util.Scanner;
 
 import Command.*;
+import ConcreteInterceptors.loggingInterceptor;
 import Interceptor.*;
 
 public class App {

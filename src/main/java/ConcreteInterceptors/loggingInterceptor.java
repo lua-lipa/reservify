@@ -1,11 +1,14 @@
-package Interceptor;
+package ConcreteInterceptors;
 
-public class welcomeInterceptor implements interceptor{
+import Interceptor.contextObject;
+import Interceptor.interceptor;
+
+public class loggingInterceptor implements interceptor {
     contextObject co;
     String triggerEvent;
     interceptor nextInChain;
 
-    public welcomeInterceptor(String triggerEvent) {
+    public loggingInterceptor(String triggerEvent) {
         this.triggerEvent = triggerEvent;
     }
 
@@ -14,16 +17,17 @@ public class welcomeInterceptor implements interceptor{
     }
 
     public void execute(String request) {
-        if (request.equals("welcome")) {
+        if (request.equals("log")) {
             System.out.println();
-            System.out.println("********************** RESERVIFY **********************");
+            System.out.println("************************* LOG *************************");
             System.out.println(co.getDateTime());
+            System.out.println(co.getLocation());
             System.out.println(co.getDescription());
             System.out.println("*******************************************************");
             System.out.println();
         } else {
-            if(nextInChain == null){
-                System.out.println("No more interceptors in chain, stopped at welcome interceptor.");
+            if(this.nextInChain == null){
+                System.out.println("No more interceptors in chain, stopped at logging interceptor.");
             } else {
                 this.nextInChain.execute(request);
             }

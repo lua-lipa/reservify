@@ -1,4 +1,7 @@
-package Interceptor;
+package ConcreteInterceptors;
+
+import Interceptor.contextObject;
+import Interceptor.interceptor;
 
 public class goodbyeInterceptor implements interceptor{
     contextObject co;
