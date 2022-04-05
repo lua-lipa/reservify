@@ -1,6 +1,5 @@
 package Reservify;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 import Booking.Booking;
 import Command.UIToolkit;
@@ -11,10 +10,7 @@ import Event.WelcomeEvent;
 import Input.Input;
 import Interceptor.contextObject;
 import Interceptor.dispatcher;
-import Interceptor.goodbyeInterceptor;
 import Interceptor.interceptor;
-import Interceptor.loggingInterceptor;
-import Interceptor.welcomeInterceptor;
 import Reservation.Reservation;
 import Reservation.ReservationFactory;
 import Reservation.StandardReservation;
@@ -65,8 +61,8 @@ public class Reservify {
         return reservation;
     }
 
-    public Event getLoggingEvent() {
-        return this.loggingEvent;
+    public  Event getLoggingEvent() {
+        return loggingEvent;
     }
 
     public void initInterceptor(interceptor i) {
