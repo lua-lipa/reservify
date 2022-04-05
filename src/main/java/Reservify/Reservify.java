@@ -23,16 +23,23 @@ public class Reservify {
     private static Reservify instance = null;
     private static UIToolkit uiInstance = null;
     private ReservationFactory reservationFactory;
-    private Event loggingEvent = null;
-    private Event goodbyeEvent = null;
+    private static Event loggingEvent = null;
+    private static Event goodbyeEvent = null;
+    private static Event welcomeEvent = null;
+    private static contextObject co;
+    private static dispatcher dispatcher;
 
     private Reservify() {}
 
     public static Reservify getInstance() {
         if (instance == null) {
             instance = new Reservify();
-            instance.initInterceptor();
-            instance.reservationFactory = new ReservationFactory(instance.loggingEvent);
+            co = new contextObject();
+            dispatcher = new dispatcher(co);
+            loggingEvent = new LoggingEvent(co, dispatcher);
+            welcomeEvent = new WelcomeEvent(co, dispatcher);
+            goodbyeEvent = new GoodbyeEvent(co, dispatcher);  
+            instance.reservationFactory = new ReservationFactory(loggingEvent);
         }
         
         return instance;
@@ -42,7 +49,8 @@ public class Reservify {
         if (uiInstance == null) {
             uiInstance = new UIToolkit(loggingEvent, goodbyeEvent, reservationFactory);
         }
-        
+        welcomeEvent.setEventInfo("In Main class", "Welcome to Reservify, please create a reservation or amend an existing one.", LocalDateTime.now());
+        welcomeEvent.trigger();   
         return uiInstance;
     }
 
@@ -61,22 +69,7 @@ public class Reservify {
         return this.loggingEvent;
     }
 
-    private void initInterceptor() {
-        interceptor logging = new loggingInterceptor("log");
-        interceptor welcome = new welcomeInterceptor("welcome");
-        interceptor goodbye = new goodbyeInterceptor("goodbye");
-
-        contextObject co = new contextObject();
-        dispatcher dispatcher = new dispatcher(co);
-        dispatcher.register(logging);
-        dispatcher.register(welcome);
-        dispatcher.register(goodbye);
-
-        this.loggingEvent = new LoggingEvent(co, dispatcher);
-        Event welcomeEvent = new WelcomeEvent(co, dispatcher);
-        this.goodbyeEvent = new GoodbyeEvent(co, dispatcher);
-
-        welcomeEvent.setEventInfo("In Main class", "Welcome to Reservify, please create a reservation or amend an existing one.", LocalDateTime.now());
-        welcomeEvent.trigger();
+    public void initInterceptor(interceptor i) {
+        dispatcher.register(i);
     }
 }
